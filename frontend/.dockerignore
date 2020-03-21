@@ -1,0 +1,11 @@
+node_modules
+upload
+export
+coverage
+.git
+.tmp
+.vscode
+.github
+.env
+dist
+build
