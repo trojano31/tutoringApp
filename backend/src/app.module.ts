@@ -1,23 +1,23 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
-import { HelloModule } from './hello.module';
 import { AuthModule } from './auth/auth.module';
+import { join } from 'path';
 
 @Module({
   imports: [
-    HelloModule,
     TypeOrmModule.forRoot(),
     GraphQLModule.forRoot({
+      typePaths: ['./**/*.graphql'],
       installSubscriptionHandlers: true,
-      autoSchemaFile: true,
       context: ({ req }) => ({ req }),
+      definitions: {
+        path: join(process.cwd(), 'src/graphql.ts'),
+      },
     }),
     AuthModule,
   ],
-  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {

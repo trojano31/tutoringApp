@@ -21,7 +21,7 @@ export class User extends BaseModel implements IUser {
   @OneToOne(type => Address)
   address: Address;
 
-  @Column()
+  @Column({ nullable: true })
   phone: string;
 
   @BeforeInsert()
