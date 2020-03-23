@@ -11,7 +11,7 @@ import { join } from 'path';
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
       installSubscriptionHandlers: true,
-      context: ({ req }) => ({ req }),
+      context: ({ req, res }) => ({ req, res }),
       definitions: {
         path: join(process.cwd(), 'src/graphql.ts'),
       },
