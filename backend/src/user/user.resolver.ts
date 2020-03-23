@@ -1,7 +1,8 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { forwardRef, Inject } from '@nestjs/common';
+import { forwardRef, Inject, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './entity/user.entity';
+import { GqlAuthGuard } from '../auth/graphql-auth.guard';
 
 @Resolver('User')
 export class UserResolver {
@@ -17,8 +18,8 @@ export class UserResolver {
   }
 
   @Query('user')
-  async getUser(obj, args) {
-    const { id } = args;
+  @UseGuards(GqlAuthGuard)
+  async getUser(@Args('id') id) {
     return await User.findByIdOrThrow(id);
   }
 

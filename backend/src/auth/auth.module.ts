@@ -10,10 +10,12 @@ import { AuthResolver } from './auth.resolver';
 @Module({
   imports: [
     UserModule,
-    PassportModule,
+    PassportModule.register({
+      defaultStrategy: 'jwt',
+    }),
     JwtModule.register({
       secret: jwtConst.secret,
-      signOptions: { expiresIn: '900s' },
+      signOptions: { expiresIn: 3600 },
     }),
   ],
   providers: [AuthService, JwtStrategy, AuthResolver],
