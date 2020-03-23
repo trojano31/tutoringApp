@@ -20,6 +20,7 @@ export class UserService {
   }
 
   async create(user: User): Promise<User> {
-    return this.usersRepository.save(user);
+    const userModel = User.create(user);
+    return this.usersRepository.save(userModel);
   }
 }
