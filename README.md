@@ -1,3 +1,45 @@
+![alt text]("../../assets/logomin.png)
+
+# LEARNY
+## Zarządzanie korepetycjami nigdy nie było prostsze.
+
+
+#### Aplikacja służąca do zarządzania korepetycjami. [opis w trakcie budowy]
+
+## Wybrane technologie.
+- [Stack technologiczny][stack]
+
+## Dowiedz się więcej...
+- [Schemat bazy danych][roadmap]
+- [Design - strona domowa][home]
+  * [Rejestracja][signup]
+  * [Logowanie][login]
+  * [Panel nauczyciela][panel]
+  * [Wyszukiwanie lekcji][find-lesson]
+  * [Rezerwowanie lekcji][book]
+- [Plany rozwoju aplikacji][roadmap]
+
+
+[home]: "/docs/home.md"
+[signup]: "/docs/signup.md"
+[login]: "/docs/login.md"
+[panel]: "/docs/panel.md"
+[find-lesson]: "/docs/find-lesson.md"
+[book]: "/docs/book.md"
+[roadmap]: "/docs/roadmap.md"
+[database]: "/docs/database.md"
+
+
+[stack]: "/docs/stack.md"
+
+
+
+## Get in Touch
+- [GitHub Issues][issues]
+
+[issues]: "https://github.com/trojano31/tutoringApp/issues
+
+
 ## Run project in dev mode (hot reloading)
 
 $ `docker-compose up`
