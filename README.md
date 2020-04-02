@@ -20,14 +20,14 @@
 - [Plany rozwoju aplikacji][roadmap]
 
 
-[home]: "/docs/home.md"
-[signup]: "/docs/signup.md"
-[login]: "/docs/login.md"
-[panel]: "/docs/panel.md"
-[find-lesson]: "/docs/find-lesson.md"
-[book]: "/docs/book.md"
-[roadmap]: "/docs/roadmap.md"
-[database]: "/docs/database.md"
+[home]: "./docs/home.md"
+[signup]: "./docs/signup.md"
+[login]: "./docs/login.md"
+[panel]: "./docs/panel.md"
+[find-lesson]: "./docs/find-lesson.md"
+[book]: "./docs/book.md"
+[roadmap]: "./docs/roadmap.md"
+[database]: "./docs/database.md"
 
 
 [stack]: "/docs/stack.md"

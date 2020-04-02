@@ -1,5 +1,7 @@
 ![alt text]("../../../assets/logomin.png)
 
-# Schemat bazy danych
+# LEARNY
+
+## Schemat bazy danych
 
 ![alt text]("../../../assets/db.png)

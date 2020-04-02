@@ -1,10 +1,11 @@
 ![alt text]("../../../assets/logomin.png)
 
+# Learny
+
 ## Roadmap
 
 ### Aplikacja jest w trakcie rozwoju. Poniżej znajdują się planowane funkcjonalności. Większość w nich jest w trakcie rozwoju.
 
-+ Create a list by starting a line with `+`, `-`, or `*`
 + Stworzenie konta
   - Rejestracja
   - Autoryzacja JWT
