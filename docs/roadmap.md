@@ -2,9 +2,9 @@
 
 # Learny
 
-## Roadmap
+## Opis wymagań biznesowych
 
-### Aplikacja jest w trakcie rozwoju. Poniżej znajdują się planowane funkcjonalności. Większość w nich jest w trakcie rozwoju.
+### Aplikacja jest w trakcie rozwoju. Poniżej znajdują się planowane funkcjonalności.
 
 + Stworzenie konta
   - Rejestracja
@@ -23,3 +23,9 @@
   - Wystawianie godzin w kalendarzu
   - Rezerwacja godziny
   - Pobranie zarezerwowanych i niezarezerwowanych godzin. 
+
+
+### W zależności od czasu planowany jest rozwój o:
++ Konta premium (np. konto typu free ograniczona ilość ogłoszeń - premium nielimitowane)
++ Czat
++ Naniesienie ogłoszeń na mapę np. Google
