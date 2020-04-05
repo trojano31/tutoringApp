@@ -10,6 +10,10 @@
 
 - [Plany rozwoju aplikacji][roadmap]
 
+## Use Case Diagram
+
+- [Use Case][usecase]
+
 ## Wybrane technologie
 
 - [Stack technologiczny][stack]
@@ -36,6 +40,7 @@
 [roadmap]: docs/roadmap.md
 [database]: docs/database.md
 [stack]: /docs/stack.md
+[usecase]: /docs/usecase.md
 
 ## Get in Touch
 
