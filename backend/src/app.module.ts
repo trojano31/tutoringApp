@@ -15,6 +15,10 @@ import { join } from 'path';
       definitions: {
         path: join(process.cwd(), 'src/graphql.ts'),
       },
+      cors: {
+        credentials: true,
+        origin: true,
+      },
     }),
     AuthModule,
   ],
