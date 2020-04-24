@@ -1,10 +1,13 @@
-version: '3'
+version: "3"
 
 services:
   database:
     image: postgres:latest
     environment:
+      PGDATA: /tmp
       POSTGRES_DB: "tutoring"
+      POSTGRES_USER: "postgres"
+      POSTGRES_HOST_AUTH_METHOD: trust
     ports:
       - "5432:5432"
     volumes:
