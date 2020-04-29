@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ApolloProvider } from "@apollo/react-hooks";
+import { Button, Menu } from "semantic-ui-react";
+
 import client from "./shared/client";
 import "./App.css";
 
-import { MainView } from "./views/main";
 import { Login } from "./views/login";
 import { SignUp } from "./views/signup";
 import { Fetch } from "./views/fetch";
@@ -14,30 +15,35 @@ function App() {
     <div className="App">
       <ApolloProvider client={client}>
         <Router>
-          <div>
-            <ul>
-              <li>
+          <Menu>
+            <Menu.Item>
+              <Button>
                 <Link to="/signup">Sign Up</Link>
-              </li>
-              <li>
+              </Button>
+            </Menu.Item>
+            <Menu.Item>
+              <Button>
                 <Link to="/login">Login</Link>
-              </li>
-              <li>
+              </Button>
+            </Menu.Item>
+            <Menu.Item>
+              <Button>
                 <Link to="/fetch">Fetch</Link>
-              </li>
-            </ul>
+              </Button>
+            </Menu.Item>
+          </Menu>
 
-            <Switch>
-              <Route path="/signup" component={SignUp} />
-
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/fetch">
-                <Fetch />
-              </Route>
-            </Switch>
-          </div>
+          <Switch>
+            <Route path="/signup">
+              <SignUp />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/fetch">
+              <Fetch />
+            </Route>
+          </Switch>
         </Router>
       </ApolloProvider>
     </div>
