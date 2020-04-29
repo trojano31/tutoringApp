@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useLazyQuery, useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import React, { useEffect, useState } from "react";
+import { useLazyQuery, useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import { Input, Button } from "semantic-ui-react";
 
 const ADD_USER = gql`
   mutation createUser($user: UserInput!) {
@@ -35,7 +36,6 @@ const FETCH_USER = gql`
   }
 `;
 
-
 export const MainView = () => {
   const [email, setEmail] = useState(null);
   const [firstName, setFirstName] = useState(null);
@@ -49,45 +49,43 @@ export const MainView = () => {
   const [fetchUser, { data }] = useLazyQuery(FETCH_USER);
 
   useEffect(() => {
-    console.log('data', data);
+    console.log("data", data);
   }, [data]);
 
   return (
     <div>
-
       <div>
         <h3>creating user</h3>
-        <input onChange={(e) => setEmail(e.target.value)} />
-        <input onChange={(e) => setFirstName(e.target.value)} />
-        <input onChange={(e) => setLastName(e.target.value)} />
-        <input onChange={(e) => setHashedPwd(e.target.value)} />
-        <button onClick={handleSignupClick}>sign up</button>
+        <Input onChange={(e) => setEmail(e.target.value)} />
+        <Input onChange={(e) => setFirstName(e.target.value)} />
+        <Input onChange={(e) => setLastName(e.target.value)} />
+        <Input onChange={(e) => setHashedPwd(e.target.value)} />
+        <Button onClick={handleSignupClick}>sign up</Button>
       </div>
-
       <div>
         <h3>login</h3>
-        <input onChange={(e) => setLogin(e.target.value)} />
-        <input onChange={(e) => setPassword(e.target.value)} />
-        <button onClick={handleLoginClick}>login</button>
+        <Input onChange={(e) => setLogin(e.target.value)} />
+        <Input onChange={(e) => setPassword(e.target.value)} />
+        <Button onClick={handleLoginClick}>login</Button>
       </div>
-
       <div>
         <h3>fetch user</h3>
-        <input onChange={(e) => setId(e.target.value)} />
-        <button onClick={handleFetchUserClick}>fetch</button>
+        <Input onChange={(e) => setId(e.target.value)} />
+        <Button onClick={handleFetchUserClick}>fetch</Button>
       </div>
-
     </div>
   );
 
   function handleSignupClick() {
-    addUser({ variables: { user: { email, firstName, lastName, hashedPwd } } })
-      .then(data => console.log('data', data))
+    addUser({ variables: { user: { email, firstName, lastName, hashedPwd } } }).then((data) =>
+      console.log("data", data)
+    );
   }
 
   function handleLoginClick() {
-    loginUser({ variables: { loginInput: { email: login, password } } })
-      .then(loginData => console.log('loginData', loginData))
+    loginUser({ variables: { loginInput: { email: login, password } } }).then((loginData) =>
+      console.log("loginData", loginData)
+    );
   }
 
   function handleFetchUserClick() {
