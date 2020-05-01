@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AuthModule } from './auth/auth.module';
 import { join } from 'path';
+import { SubjectModule } from './subject/subject.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { join } from 'path';
       },
     }),
     AuthModule,
+    SubjectModule,
   ],
   providers: [AppService],
 })
