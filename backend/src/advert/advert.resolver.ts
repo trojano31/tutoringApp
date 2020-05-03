@@ -19,6 +19,11 @@ export class AdvertResolver {
         return this.advertService.findById(id);
     }
 
+    @Query('adverts')
+    async getAdverts(@Args('advertFilter') advertFilter): Promise<PaginatedResult<AdvertDto> | undefined> {
+        return this.advertService.find(advertFilter);
+    }
+
     @Mutation('addAdvert')
     @UseGuards(GqlAuthGuard)
     async addAdvert(@Args('advert') advertInput, @Context() context: ExecutionContext): Promise<AdvertDto | undefined> {

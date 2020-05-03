@@ -1,13 +1,15 @@
 import {forwardRef, Inject, Injectable} from '@nestjs/common';
 import {InjectRepository} from '@nestjs/typeorm';
 import {AdvertEntity} from './entity/advert.entity';
-import {Repository} from 'typeorm';
+import {getRepository, Repository} from 'typeorm';
 import {AddAdvertDto} from './dto/addAdvertDto';
 import {SubjectService} from '../subject/subject.service';
 import {UserService} from '../user/user.service';
 import {AdvertDto} from './dto/advertDto';
 import {User} from '../user/entity/user.entity';
 import {SubjectDto} from '../subject/subjectDto';
+import {PaginatedResult} from '../common/PaginatedResult';
+import {AdvertFilter} from './dto/advertFilter';
 
 @Injectable()
 export class AdvertService {
@@ -37,6 +39,65 @@ export class AdvertService {
                 entity.teacher?.address,
                 entity.teacher?.phone),
         );
+    }
+
+    async find(advertFilter: AdvertFilter): Promise<PaginatedResult<AdvertDto> | undefined> {
+
+        const page = advertFilter.page > 0 ? advertFilter.page : 1;
+        const priceFrom = advertFilter.priceFrom != null ? advertFilter.priceFrom : 0;
+
+        let queryBuilder = await getRepository(AdvertEntity)
+            .createQueryBuilder('advert')
+            .where('advert.dateTo >= now() and advert.dateFrom <= now()')
+            .andWhere('advert.subjectId = :subjectId', {subjectId: advertFilter.subjectId})
+            .leftJoinAndSelect('advert.teacher', 'teacher')
+            .leftJoinAndSelect('advert.subject', 'subject');
+
+        if (advertFilter.city != null) {
+            queryBuilder = await queryBuilder.andWhere('');
+        }
+
+        if (advertFilter.place != null) {
+            queryBuilder.andWhere('advert.place = :place', {place: advertFilter.place});
+        }
+
+        if (advertFilter.level != null) {
+            queryBuilder.andWhere('advert.place = :level', {level: advertFilter.level});
+        }
+
+        if (advertFilter.priceTo != null) {
+            queryBuilder.andWhere('advert.price between :from and :to', {from: priceFrom, to: advertFilter.priceTo});
+        }
+
+        const entities = await queryBuilder
+            .skip((page - 1) * advertFilter.itemsPerPage)
+            .take(advertFilter.itemsPerPage)
+            .getMany();
+
+        const count = await queryBuilder.getCount();
+        const hasNext = (page + 1) * advertFilter.itemsPerPage < count;
+        const hasPrev = (page - 1) * advertFilter.itemsPerPage > 0;
+
+        return new PaginatedResult<AdvertDto>(entities.map(x =>
+                new AdvertDto(x.id,
+                    x.place,
+                    x.level,
+                    x.dateFrom,
+                    x.dateTo,
+                    x.time,
+                    x.price,
+                    new SubjectDto(x.subject.id, x.subject.name),
+                    new User(x.teacher?.email,
+                        x.teacher?.hashedPwd,
+                        x.teacher?.firstName,
+                        x.teacher?.lastName,
+                        x.teacher?.address,
+                        x.teacher?.phone),
+                ),
+            ),
+            count,
+            hasNext,
+            hasPrev);
     }
 
     async addAdvert(advert: AddAdvertDto): Promise<AdvertDto | undefined> {
