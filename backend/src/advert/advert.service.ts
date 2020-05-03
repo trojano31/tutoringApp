@@ -6,6 +6,8 @@ import {AddAdvertDto} from './dto/addAdvertDto';
 import {SubjectService} from '../subject/subject.service';
 import {UserService} from '../user/user.service';
 import {AdvertDto} from './dto/advertDto';
+import {User} from '../user/entity/user.entity';
+import {SubjectDto} from '../subject/subjectDto';
 
 @Injectable()
 export class AdvertService {
@@ -16,6 +18,25 @@ export class AdvertService {
         private readonly subjectService: SubjectService,
         @Inject(forwardRef(() => UserService))
         private readonly userService: UserService) {
+    }
+
+    async findById(id: number): Promise<AdvertDto | undefined> {
+        const entity = await this.advertRepository.findOne(id);
+        return new AdvertDto(entity.id,
+            entity.place,
+            entity.level,
+            entity.dateFrom,
+            entity.dateTo,
+            entity.time,
+            entity.price,
+            new SubjectDto(entity.subject.id, entity.subject.name),
+            new User(entity.teacher?.email,
+                entity.teacher?.hashedPwd,
+                entity.teacher?.firstName,
+                entity.teacher?.lastName,
+                entity.teacher?.address,
+                entity.teacher?.phone),
+        );
     }
 
     async addAdvert(advert: AddAdvertDto): Promise<AdvertDto | undefined> {

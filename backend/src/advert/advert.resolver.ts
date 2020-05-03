@@ -1,4 +1,4 @@
-import {Args, Context, Mutation, Resolver} from '@nestjs/graphql';
+import {Args, Context, Mutation, Query, Resolver} from '@nestjs/graphql';
 import {ExecutionContext, forwardRef, Inject, UseGuards} from '@nestjs/common';
 import {AdvertService} from './advert.service';
 import {GqlAuthGuard} from '../auth/graphql-auth.guard';
@@ -12,6 +12,11 @@ export class AdvertResolver {
         @Inject(forwardRef(() => AdvertService))
         private readonly advertService: AdvertService,
     ) {
+    }
+
+    @Query('advert')
+    async getAdvert(@Args('id') id): Promise<AdvertDto | undefined> {
+        return this.advertService.findById(id);
     }
 
     @Mutation('addAdvert')
