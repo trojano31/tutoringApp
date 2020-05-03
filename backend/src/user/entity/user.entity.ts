@@ -1,5 +1,5 @@
 import { BaseModel } from '../../../bases/BaseModel';
-import {BeforeInsert, Column, Entity, OneToMany, OneToOne} from 'typeorm';
+import {BeforeInsert, Column, Entity, Index, OneToMany, OneToOne} from 'typeorm';
 import { Address } from './address.entity';
 import { IUser } from '../interfaces/user.interface';
 import * as bcrypt from 'bcrypt';
@@ -8,6 +8,7 @@ import {AdvertEntity} from '../../advert/entity/advert.entity';
 @Entity()
 export class User extends BaseModel implements IUser {
   @Column()
+  @Index({unique: true})
   email: string;
 
   @Column()

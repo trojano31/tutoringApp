@@ -13,7 +13,7 @@ export class SubjectService {
     ) {
     }
 
-    async findById(id: number): Promise<SubjectDto | undefined> {
+    async findById(id: string): Promise<SubjectDto | undefined> {
         const entity = await this.subjectsRepository.findOne(id);
         return new SubjectDto(entity.id, entity.name);
     }

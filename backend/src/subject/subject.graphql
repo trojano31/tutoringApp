@@ -1,6 +1,6 @@
 type Query {
     subjects(paginationInput: PaginationInput!): SubjectList
-    subject(id:ID!):Subject!
+    subject(id:uuid!):Subject!
 }
 
 type Mutation {
@@ -8,7 +8,7 @@ type Mutation {
 }
 
 type Subject{
-    id: Int!
+    id: uuid!
     name: String!
 }
 

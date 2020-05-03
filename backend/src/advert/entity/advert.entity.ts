@@ -27,15 +27,17 @@ export class AdvertEntity extends BaseModel implements IAdvert {
     @ManyToOne(type => User, user => user.teacherAdverts)
     teacher: User;
     @Column({nullable: false})
-    teacherId: number;
+    teacherId: string;
     @ManyToOne(type => User, user => user.studentAdverts)
     student: User;
     @Column({nullable: true})
-    studentId: number;
+    studentId: string;
     @ManyToOne(type => SubjectEntity, subject => subject.advert)
     subject: SubjectEntity;
     @Column()
-    subjectId: number;
+    subjectId: string;
+    @Column({nullable: true})
+    isDeleted?: boolean;
 
     constructor(dateFrom: Date,
                 dateTo: Date,
@@ -43,8 +45,8 @@ export class AdvertEntity extends BaseModel implements IAdvert {
                 level: LevelType,
                 price: number,
                 time: Timestamp,
-                teacherId: number,
-                subjectId: number) {
+                teacherId: string,
+                subjectId: string) {
         super();
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;

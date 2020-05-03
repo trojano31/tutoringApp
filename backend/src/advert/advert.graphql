@@ -1,14 +1,15 @@
 type Query {
     adverts(advertFilter: AdvertFilter!):Adverts
-    advert(id: ID!): Advert
+    advert(id: uuid!): Advert
 }
 
 type Mutation {
     addAdvert(advert: AdvertInput!):Advert
+    deleteAdvert(id: uuid!): String!
 }
 
 type Advert{
-    id: ID!
+    id: uuid!
     subject: Subject!
     place: Place!
     level: Level!
@@ -27,7 +28,7 @@ type Adverts{
 }
 
 input AdvertInput{
-    subjectId: ID!
+    subjectId: uuid!
     place: Place
     level: Level
     dateFrom: Date!
@@ -39,8 +40,8 @@ input AdvertInput{
 input AdvertFilter{
     page: Int!
     itemsPerPage: Int!
-    subjectId: ID!
-    cityId: ID
+    subjectId: uuid!
+    cityId: uuid
     level: Level
     place: Place
     priceFrom: Float

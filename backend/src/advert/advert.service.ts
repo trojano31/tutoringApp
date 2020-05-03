@@ -1,4 +1,4 @@
-import {forwardRef, Inject, Injectable} from '@nestjs/common';
+import {forwardRef, Inject, Injectable, UnauthorizedException} from '@nestjs/common';
 import {InjectRepository} from '@nestjs/typeorm';
 import {AdvertEntity} from './entity/advert.entity';
 import {getRepository, Repository} from 'typeorm';
@@ -22,7 +22,7 @@ export class AdvertService {
         private readonly userService: UserService) {
     }
 
-    async findById(id: number): Promise<AdvertDto | undefined> {
+    async findById(id: string): Promise<AdvertDto | undefined> {
         const entity = await this.advertRepository.findOne(id);
         return new AdvertDto(entity.id,
             entity.place,
@@ -48,7 +48,7 @@ export class AdvertService {
 
         let queryBuilder = await getRepository(AdvertEntity)
             .createQueryBuilder('advert')
-            .where('advert.dateTo >= now() and advert.dateFrom <= now()')
+            .where('advert.dateTo >= now() and advert.dateFrom <= now() and advert.isDeleted = false')
             .andWhere('advert.subjectId = :subjectId', {subjectId: advertFilter.subjectId})
             .leftJoinAndSelect('advert.teacher', 'teacher')
             .leftJoinAndSelect('advert.subject', 'subject');
@@ -125,5 +125,18 @@ export class AdvertService {
             created.price,
             subject,
             teacher);
+    }
+
+    async deleteAdvert(id: string, userId: string): Promise<boolean> {
+        const entity = await this.advertRepository.findOne(id);
+        if (entity != null) {
+            if (entity.teacherId !== userId) {
+                throw new UnauthorizedException();
+            }
+            entity.isDeleted = true;
+            await this.advertRepository.save(entity);
+            return true;
+        }
+        return false;
     }
 }

@@ -1,5 +1,5 @@
 export class SubjectDto {
-    id: number;
+    id: string;
     name: string;
 
     constructor(id, name) {

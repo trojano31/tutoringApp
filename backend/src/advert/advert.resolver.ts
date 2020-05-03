@@ -40,4 +40,17 @@ export class AdvertResolver {
             advertInput.price);
         return await this.advertService.addAdvert(advert);
     }
+
+    @Mutation('deleteAdvert')
+    @UseGuards(GqlAuthGuard)
+    async deleteAdvert(@Args('id') id, @Context() context: ExecutionContext): Promise<string> {
+        // @ts-ignore
+        const ctx = context.req.user;
+        const userId = ({...ctx}).id;
+        const result = await this.advertService.deleteAdvert(id, userId);
+        if (result) {
+            return 'OK';
+        }
+        return 'Error';
+    }
 }
