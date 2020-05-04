@@ -53,4 +53,13 @@ export class AdvertResolver {
         }
         return 'Error';
     }
+
+    @Mutation('updateAdvert')
+    @UseGuards(GqlAuthGuard)
+    async updateAdvert(@Args('advert') advert, @Context() context: ExecutionContext): Promise<AdvertDto | undefined> {
+        // @ts-ignore
+        const ctx = context.req.user;
+        const userId = ({...ctx}).id;
+        return await this.advertService.editAdvert(advert, userId);
+    }
 }

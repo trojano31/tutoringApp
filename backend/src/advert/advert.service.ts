@@ -1,4 +1,4 @@
-import {forwardRef, Inject, Injectable, UnauthorizedException} from '@nestjs/common';
+import {forwardRef, Inject, Injectable, NotFoundException, UnauthorizedException} from '@nestjs/common';
 import {InjectRepository} from '@nestjs/typeorm';
 import {AdvertEntity} from './entity/advert.entity';
 import {getRepository, Repository} from 'typeorm';
@@ -10,6 +10,8 @@ import {User} from '../user/entity/user.entity';
 import {SubjectDto} from '../subject/subjectDto';
 import {PaginatedResult} from '../common/PaginatedResult';
 import {AdvertFilter} from './dto/advertFilter';
+import {UpdateAdvertDto} from './dto/updateAdvertDto';
+import {CannotEditReservedAdvertException} from './exceptions/cannotEditReservedAdvertException';
 
 @Injectable()
 export class AdvertService {
@@ -138,5 +140,46 @@ export class AdvertService {
             return true;
         }
         return false;
+    }
+
+    async editAdvert(updateAvertDto: UpdateAdvertDto, userId: string): Promise<AdvertDto | undefined> {
+        const entity = await this.advertRepository.findOne(updateAvertDto.id);
+
+        if (entity == null) {
+            throw new NotFoundException();
+        }
+
+        if (entity.teacherId !== userId) {
+            throw new UnauthorizedException();
+        }
+
+        const idAdvertExpired = entity.dateTo <= new Date();
+        if (entity.studentId != null && !idAdvertExpired) {
+            throw new CannotEditReservedAdvertException(`Advert with id: ${updateAvertDto.id} is reserved`);
+        }
+
+        entity.subjectId = updateAvertDto.subjectId;
+        entity.place = updateAvertDto.place;
+        entity.level = updateAvertDto.level;
+        entity.dateFrom = updateAvertDto.dateFrom;
+        entity.dateTo = updateAvertDto.dateTo;
+        entity.time = updateAvertDto.time;
+        entity.price = updateAvertDto.price;
+
+        const teacher = await this.userService.findById(entity.teacherId);
+        const subject = await this.subjectService.findById(entity.subjectId);
+
+        await this.advertRepository.save(entity);
+
+        return new AdvertDto(
+            entity.id,
+            entity.place,
+            entity.level,
+            entity.dateFrom,
+            entity.dateTo,
+            entity.time,
+            entity.price,
+            subject,
+            teacher);
     }
 }
