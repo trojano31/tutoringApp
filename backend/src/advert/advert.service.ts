@@ -25,7 +25,16 @@ export class AdvertService {
     }
 
     async findById(id: string): Promise<AdvertDto | undefined> {
-        const entity = await this.advertRepository.findOne(id);
+        const entity = await getRepository(AdvertEntity)
+            .createQueryBuilder('advert')
+            .where('advert.id = :id', {id})
+            .leftJoinAndSelect('advert.teacher', 'teacher')
+            .leftJoinAndSelect('advert.subject', 'subject')
+            .getOne();
+
+        if (entity == null) {
+            return null;
+        }
         return new AdvertDto(entity.id,
             entity.place,
             entity.level,
