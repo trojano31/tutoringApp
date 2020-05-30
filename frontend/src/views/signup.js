@@ -30,10 +30,12 @@ export const SignUp = () => {
     register({ name: "password" }, { required: true });
   }, []);
 
-  const { register, errors, handleSubmit, setValue, triggerValidation } = useForm();
+  const { register, errors, handleSubmit, setValue, triggerValidation } = useForm({
+    mode: "onBlur",
+  });
   const onSubmit = (data, e) => {
     console.log("Submit event", e);
-    alert(JSON.stringify(data));
+    cogoToast.success("Konto zalozone");
   };
 
   return (
@@ -56,7 +58,7 @@ export const SignUp = () => {
               required: true,
               pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             })}
-            error={errors.email ? true : false}
+            error={errors.email && <p>This is required</p>}
           />
 
           <Form.Input
@@ -71,7 +73,7 @@ export const SignUp = () => {
               await triggerValidation({ name });
             }}
             ref={register({ required: true, maxLength: 80 })}
-            error={errors.firstName ? true : false}
+            error={errors.firstName && <p>This is required</p>}
           />
 
           <Form.Input
@@ -86,7 +88,7 @@ export const SignUp = () => {
               await triggerValidation({ name });
             }}
             ref={register({ required: true })}
-            error={errors.lastName ? true : false}
+            error={errors.lastName && <p>This is required</p>}
           />
 
           <Form.Input
@@ -102,7 +104,7 @@ export const SignUp = () => {
               await triggerValidation({ name });
             }}
             ref={register({ required: true })}
-            error={errors.password ? true : false}
+            error={errors.password && <p>This is required</p>}
           />
         </Form.Group>
         <Button type="submit" primary onClick={handleSignupClick}>
@@ -113,9 +115,10 @@ export const SignUp = () => {
   );
 
   function handleSignupClick() {
-    addUser({ variables: { user: { email, firstName, lastName, hashedPwd } } }).then((data) =>
-      console.log("data", data)
-    );
-    cogoToast.success("Konto założone");
+    addUser({ variables: { user: { email, firstName, lastName, hashedPwd } } })
+      .then((data) => console.log("data", data))
+      .catch(() => {
+        cogoToast.error("Complete all fields");
+      });
   }
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLazyQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Input, Button } from "semantic-ui-react";
+import cogoToast from "cogo-toast";
 
 const FETCH_USER = gql`
   query user($id: ID!) {
