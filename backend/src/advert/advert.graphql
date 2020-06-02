@@ -1,0 +1,77 @@
+type Query {
+    adverts(advertFilter: AdvertFilter!):Adverts
+    advert(id: uuid!): Advert
+}
+
+type Mutation {
+    addAdvert(advert: AdvertInput!):Advert
+    deleteAdvert(id: uuid!): String!
+    updateAdvert(advert: UpdateAdvertInput!): Advert
+}
+
+type Advert{
+    id: uuid!
+    subject: Subject!
+    place: Place!
+    level: Level!
+    price: Float!
+    teacher: User
+    dateFrom: Date!
+    dateTo: Date!
+    time: DateTime!
+}
+
+type Adverts{
+    result: [Advert!]
+    count: Int!
+    hasNext: Boolean!
+    hasPrev: Boolean!
+}
+
+input AdvertInput{
+    subjectId: uuid!
+    place: Place
+    level: Level
+    dateFrom: Date!
+    dateTo: Date
+    time: DateTime!
+    price: Float!
+}
+
+input UpdateAdvertInput{
+    id: uuid!
+    subjectId: uuid!
+    place: Place
+    level: Level
+    dateFrom: Date!
+    dateTo: Date
+    time: DateTime!
+    price: Float!
+}
+
+input AdvertFilter{
+    page: Int!
+    itemsPerPage: Int!
+    subjectId: uuid!
+    cityId: uuid
+    level: Level
+    place: Place
+    priceFrom: Float
+    priceTo: Float
+}
+
+enum Place{
+    ONLINE,
+    AT_TEACHER,
+    AT_STUDENT
+}
+
+enum Level{
+    PRIMARY_SCHOOL,
+    SECONDARY_SCHOOL,
+    HIGH_SCHOOL,
+    COLLEGE,
+}
+
+scalar DateTime
+scalar Date

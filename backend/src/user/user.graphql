@@ -1,6 +1,6 @@
 type Query {
   users: [User],
-  user(id: ID!): User
+  user(id: uuid!): User
 }
 
 type Mutation {
@@ -8,7 +8,7 @@ type Mutation {
 }
 
 type User {
-  id: Int
+  id: uuid
   email: String
   hashedPwd: String
   firstName: String
@@ -29,3 +29,5 @@ input UserInput {
   lastName: String!
   hashedPwd: String!
 }
+
+scalar uuid

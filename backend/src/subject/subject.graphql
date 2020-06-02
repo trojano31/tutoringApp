@@ -1,0 +1,26 @@
+type Query {
+    subjects(paginationInput: PaginationInput!): SubjectList
+    subject(id:uuid!):Subject!
+}
+
+type Mutation {
+    addSubject(name: String!) : Subject
+}
+
+type Subject{
+    id: uuid!
+    name: String!
+}
+
+input PaginationInput{
+    page: Int!
+    itemsPerPage: Int!
+    filter: String
+}
+
+type SubjectList{
+    result: [Subject!]
+    count: Int!
+    hasNext: Boolean!
+    hasPrev: Boolean!
+}
