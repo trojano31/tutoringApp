@@ -21,10 +21,6 @@ export const Fetch = () => {
 
   const [fetchUser, { data }] = useLazyQuery(FETCH_USER);
 
-  useEffect(() => {
-    console.log("data", data);
-  }, [data]);
-
   return (
     <div>
       <div>
