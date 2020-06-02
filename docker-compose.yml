@@ -13,6 +13,20 @@ services:
     volumes:
       - my_dbdata:/var/lib/postgresql/data
 
+  minio:
+    hostname: minio
+    container_name: minio
+    image: minio/minio
+    command: server /export
+    ports:
+      - "9000:9000"
+    restart: always
+    environment:
+      MINIO_ACCESS_KEY: 4D9185C8CC9649B9
+      MINIO_SECRET_KEY: 162865EFD4DC4D1DB4F6A3D05559F54C
+    volumes:
+      - minio-data:/export
+
   backend:
     build: ./backend
     volumes:
@@ -34,3 +48,4 @@ services:
       - backend
 volumes:
   my_dbdata:
+  minio-data:
