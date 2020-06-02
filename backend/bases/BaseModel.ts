@@ -7,8 +7,8 @@ export class BaseModel extends BaseEntity {
 
  static async findOneOrThrow <T extends BaseModel>(this: ObjectType<T>, options: FindManyOptions<T>) {
    const one = await getRepository(this).findOne(options);
-   if (one) {
-     throw new BadRequestException('Item not found')
+   if (!one) {
+     throw new BadRequestException('Item not found');
    }
    return one;
  }

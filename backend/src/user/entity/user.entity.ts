@@ -1,9 +1,11 @@
 import { BaseModel } from '../../../bases/BaseModel';
-import { Column, OneToOne } from 'typeorm';
+import { BeforeInsert, Column, Entity, OneToOne } from 'typeorm';
 import { Address } from './address.entity';
 import { IUser } from '../interfaces/user.interface';
+import * as bcrypt from 'bcrypt';
 
-export class User extends BaseModel implements IUser{
+@Entity()
+export class User extends BaseModel implements IUser {
   @Column()
   email: string;
 
@@ -19,6 +21,15 @@ export class User extends BaseModel implements IUser{
   @OneToOne(type => Address)
   address: Address;
 
-  @Column()
+  @Column({ nullable: true })
   phone: string;
+
+  @BeforeInsert()
+  async hashPassword() {
+    this.hashedPwd = await bcrypt.hash(this.hashedPwd, 10);
+  }
+
+  async comparePassword(attempt: string): Promise<boolean> {
+    return bcrypt.compare(attempt, this.hashedPwd);
+  }
 }

@@ -1,8 +1,13 @@
-version: '3'
+version: "3"
 
 services:
   database:
     image: postgres:latest
+    environment:
+      PGDATA: /tmp
+      POSTGRES_DB: "tutoring"
+      POSTGRES_USER: "postgres"
+      POSTGRES_HOST_AUTH_METHOD: trust
     ports:
       - "5432:5432"
     volumes:
@@ -12,6 +17,7 @@ services:
     build: ./backend
     volumes:
       - ./backend/src:/app/src
+      - /backend/node_modules
     ports:
       - "5000:5000"
     depends_on:
@@ -21,6 +27,7 @@ services:
     build: ./frontend
     volumes:
       - ./frontend/src:/app/src
+      - /frontend/node_modules
     ports:
       - "3000:3000"
     depends_on:
