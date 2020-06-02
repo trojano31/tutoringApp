@@ -36,6 +36,7 @@
     "minio": "^7.0.16",
     "mo": "^1.7.3",
     "nestjs-minio": "^1.0.6",
+    "graphql-voyager": "^1.0.0-rc.29",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
