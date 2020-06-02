@@ -15,9 +15,6 @@ const LOGIN = gql`
   }
 `;
 
-// TO DO
-// POPRAWIĆ REACT-HOOK-FORM
-
 export const Login = () => {
   const [login, setLogin] = useState(null);
   const [password, setPassword] = useState(null);

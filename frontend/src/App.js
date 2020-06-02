@@ -6,9 +6,9 @@ import { Button, Menu } from "semantic-ui-react";
 import client from "./shared/client";
 import "./App.css";
 
-import { Login } from "./views/login";
-import { SignUp } from "./views/signup";
-import { Fetch } from "./views/fetch";
+import { Login } from "./views/login/login";
+import { SignUp } from "./views/signup/signup";
+import { Fetch } from "./views/fetch/fetch";
 
 function App() {
   return (
