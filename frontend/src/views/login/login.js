@@ -5,7 +5,7 @@ import { Button, Form } from "semantic-ui-react";
 import { useForm } from "react-hook-form";
 import cogoToast from "cogo-toast";
 
-const LOGIN = gql`
+export const LOGIN = gql`
   mutation($loginInput: LoginInput!) {
     login(loginInput: $loginInput) {
       email
@@ -40,6 +40,7 @@ export const Login = () => {
           fluid
           placeholder="E-mail"
           name="login"
+          data-testid='login-inputLogin'
           ref={register({
             required: true,
             pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -54,6 +55,7 @@ export const Login = () => {
         <Form.Input
           fluid
           placeholder="Hasło"
+          data-testid='loginInputPassword'
           name="password"
           error={errors.password && <p>This is required</p>}
           ref={register({ required: true })}
@@ -65,7 +67,7 @@ export const Login = () => {
         />
       </Form.Group>
 
-      <Button primary onClick={handleLoginClick}>
+      <Button primary onClick={handleLoginClick} data-testid='login-button'>
         Zaloguj się
       </Button>
     </Form>
