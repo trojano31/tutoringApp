@@ -48,6 +48,7 @@ export const SignUp = () => {
             id="form-input-control-error-email"
             control={Input}
             placeholder="joe@schmoe.com"
+            data-testid="signup-inputmail"
             name="email"
             onChange={async (e, { name, value }) => {
               setEmail(e.target.value);
@@ -66,6 +67,7 @@ export const SignUp = () => {
             id="form-input-control-first-name"
             control={Input}
             placeholder="First name"
+            data-testid="signup-inputFirstName"
             name="firstName"
             onChange={async (e, { name, value }) => {
               setFirstName(e.target.value);
@@ -81,6 +83,7 @@ export const SignUp = () => {
             id="form-input-control-last-name"
             control={Input}
             placeholder="Last name"
+            data-testid="signup-inputLastName"
             name="lastName"
             onChange={async (e, { name, value }) => {
               setLastName(e.target.value);
@@ -96,6 +99,7 @@ export const SignUp = () => {
             id="form-input=control-password"
             control={Input}
             placeholder="Hasło"
+            data-testid="signup-inputPassword"
             name="password"
             type="password"
             onChange={async (e, { name, value }) => {
@@ -107,7 +111,7 @@ export const SignUp = () => {
             error={errors.password && <p>This is required</p>}
           />
         </Form.Group>
-        <Button type="submit" primary onClick={handleSignupClick}>
+        <Button type="submit" primary onClick={handleSignupClick} data-testid="signup-button">
           Zarejestruj się
         </Button>
       </Form>
