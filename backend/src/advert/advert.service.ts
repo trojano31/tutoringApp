@@ -6,12 +6,13 @@ import {AddAdvertDto} from './dto/addAdvertDto';
 import {SubjectService} from '../subject/subject.service';
 import {UserService} from '../user/user.service';
 import {AdvertDto} from './dto/advertDto';
-import {User} from '../user/entity/user.entity';
+import {UserEntity} from '../user/entity/user.entity';
 import {SubjectDto} from '../subject/subjectDto';
 import {PaginatedResult} from '../common/PaginatedResult';
 import {AdvertFilter} from './dto/advertFilter';
 import {UpdateAdvertDto} from './dto/updateAdvertDto';
 import {CannotEditReservedAdvertException} from './exceptions/cannotEditReservedAdvertException';
+import {CityService} from '../user/city.service';
 
 @Injectable()
 export class AdvertService {
@@ -21,7 +22,9 @@ export class AdvertService {
         @Inject(forwardRef(() => SubjectService))
         private readonly subjectService: SubjectService,
         @Inject(forwardRef(() => UserService))
-        private readonly userService: UserService) {
+        private readonly userService: UserService,
+        @Inject(forwardRef(() => CityService))
+        private readonly cityService: CityService) {
     }
 
     async findById(id: string): Promise<AdvertDto | undefined> {
@@ -43,11 +46,11 @@ export class AdvertService {
             entity.time,
             entity.price,
             new SubjectDto(entity.subject.id, entity.subject.name),
-            new User(entity.teacher?.email,
+            new UserEntity(entity.teacher?.email,
                 entity.teacher?.hashedPwd,
                 entity.teacher?.firstName,
                 entity.teacher?.lastName,
-                entity.teacher?.address,
+                entity.teacher?.city,
                 entity.teacher?.phone),
         );
     }
@@ -64,8 +67,8 @@ export class AdvertService {
             .leftJoinAndSelect('advert.teacher', 'teacher')
             .leftJoinAndSelect('advert.subject', 'subject');
 
-        if (advertFilter.city != null) {
-            queryBuilder = await queryBuilder.andWhere('');
+        if (advertFilter.cityId != null) {
+            queryBuilder = await queryBuilder.andWhere('advert.teacher.cityId = :cityId', {cityId: advertFilter.cityId});
         }
 
         if (advertFilter.place != null) {
@@ -98,11 +101,11 @@ export class AdvertService {
                     x.time,
                     x.price,
                     new SubjectDto(x.subject.id, x.subject.name),
-                    new User(x.teacher?.email,
+                    new UserEntity(x.teacher?.email,
                         x.teacher?.hashedPwd,
                         x.teacher?.firstName,
                         x.teacher?.lastName,
-                        x.teacher?.address,
+                        x.teacher?.city,
                         x.teacher?.phone),
                 ),
             ),

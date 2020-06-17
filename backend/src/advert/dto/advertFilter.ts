@@ -8,5 +8,5 @@ export class AdvertFilter extends PaginationDto {
     level: LevelType;
     priceFrom?: number;
     priceTo: number;
-    city?: string;
+    cityId?: string;
 }

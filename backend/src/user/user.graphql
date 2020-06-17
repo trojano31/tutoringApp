@@ -1,6 +1,7 @@
 type Query {
-  users: [User],
+  users(paginationInput: PaginationInput!): UserList,
   user(id: uuid!): User
+  cities(paginationInput: PaginationInput!): CityList
 }
 
 type Mutation {
@@ -10,24 +11,38 @@ type Mutation {
 type User {
   id: uuid
   email: String
-  hashedPwd: String
   firstName: String
   lastName: String
   phone: String
-  address: Address
+  city: City
 }
 
-type Address {
-  id: Int
-  city: String
-  street: String
+type UserList{
+  result: [User]
+  count: Int!
+  hasNext: Boolean!
+  hasPrev: Boolean!
+}
+
+type City {
+  id: uuid!
+  name: String!
+}
+
+type CityList{
+  result: [City]
+  count: Int!
+  hasNext: Boolean!
+  hasPrev: Boolean!
 }
 
 input UserInput {
   email: String!
   firstName: String!
   lastName: String!
-  hashedPwd: String!
+  password: String!
+  phoneNumber: String!
+  city: String!
 }
 
 scalar uuid
