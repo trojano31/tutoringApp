@@ -15,6 +15,9 @@ export class SubjectService {
 
     async findById(id: string): Promise<SubjectDto | undefined> {
         const entity = await this.subjectsRepository.findOne(id);
+        if (entity == null) {
+            throw new Error('Subject was not found');
+        }
         return new SubjectDto(entity.id, entity.name);
     }
 

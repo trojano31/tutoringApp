@@ -115,6 +115,17 @@ export class AdvertService {
     }
 
     async addAdvert(advert: AddAdvertDto): Promise<AdvertDto | undefined> {
+
+        const subject = await this.subjectService.findById(advert.subjectId);
+        if (subject == null) {
+            throw new Error('Subject was not found');
+        }
+
+        const teacher = await this.userService.findById(advert.teacherId);
+        if (teacher == null) {
+            throw new Error('Teacher was not found');
+        }
+
         const entity = AdvertEntity.create(new AdvertEntity(
             advert.dateFrom,
             advert.dateTo,
@@ -126,8 +137,6 @@ export class AdvertService {
             advert.subjectId));
 
         const created = await this.advertRepository.save(entity);
-        const subject = await this.subjectService.findById(created.subjectId);
-        const teacher = await this.userService.findById(created.teacherId);
 
         return new AdvertDto(
             created.id,
@@ -193,5 +202,40 @@ export class AdvertService {
             entity.price,
             subject,
             teacher);
+    }
+
+    async reserve(id: string, userId: string): Promise<AdvertDto> {
+        const entity = await this.advertRepository.findOne(id);
+        if (entity != null) {
+            if (entity.studentId != null) {
+                throw new Error('Advert is already reserved');
+            }
+
+            const teacher = await this.userService.findById(entity.teacherId);
+            const student = await this.userService.findById(userId);
+            const subject = await this.subjectService.findById(entity.subjectId);
+
+            if (student == null) {
+                throw new Error('User was not found');
+            }
+
+            if (entity.teacherId === userId) {
+                throw new Error('Cannot reserve own advert');
+            }
+
+            entity.studentId = userId;
+
+            await this.advertRepository.save(entity);
+
+            return new AdvertDto(entity.id,
+                entity.place,
+                entity.level,
+                entity.dateFrom,
+                entity.dateTo,
+                entity.time,
+                entity.price,
+                subject,
+                teacher);
+        }
     }
 }
