@@ -94,7 +94,11 @@ export const Login = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <TextField
               variant="outlined"
               margin="normal"
@@ -102,7 +106,7 @@ export const Login = () => {
               fullWidth
               id="email"
               label="Email Address"
-              name="email"
+              name="login"
               autoComplete="email"
               autoFocus
               ref={register({

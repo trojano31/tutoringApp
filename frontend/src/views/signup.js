@@ -116,7 +116,7 @@ export const SignUp = () => {
                 pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               })}
               onChange={async (e, { name, value }) => {
-                setLogin(e.target.value);
+                setEmail(e.target.value);
                 setValue(name, value);
                 await triggerValidation({ name });
               }}
@@ -127,18 +127,55 @@ export const SignUp = () => {
               margin="normal"
               required
               fullWidth
+              placeholder="First Name"
+              name="firstName"
+              type="text"
+              id="form-input-control-first-name"
+              onChange={async (e, { name, value }) => {
+                setFirstName(e.target.value);
+                setValue(name, value);
+                await triggerValidation({ name });
+              }}
+              ref={register({ required: true, maxLength: 80 })}
+              error={errors.firstName && <p>This is required</p>}
+            />
+
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              placeholder="Last Name"
+              name="lastName"
+              type="password"
+              id="form-input-control-last-name"
+              autoComplete="current-name"
+              onChange={async (e, { name, value }) => {
+                setLastName(e.target.value);
+                setValue(name, value);
+                await triggerValidation({ name });
+              }}
+              ref={register({ required: true })}
+              error={errors.lastName && <p>This is required</p>}
+            />
+
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
               name="password"
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
-              error={errors.password && <p>This is required</p>}
-              ref={register({ required: true })}
               onChange={async (e, { name, value }) => {
-                setPassword(e.target.value);
+                setHashedPwd(e.target.value);
                 setValue(name, value);
-                await triggerValidation({ password });
+                await triggerValidation({ name });
               }}
+              ref={register({ required: true })}
+              error={errors.password && <p>This is required</p>}
             />
 
             <Button
@@ -147,9 +184,9 @@ export const SignUp = () => {
               variant="outlined"
               color="primary"
               className={classes.submit}
-              onClick={handleLoginClick}
+              onClick={handleSignupClick}
             >
-              Sign In
+              Sign Up
             </Button>
             <Grid container>
               <Grid item xs>
@@ -158,8 +195,8 @@ export const SignUp = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="login" variant="body2">
+                  {"Already have an account? Sign In"}
                 </Link>
               </Grid>
             </Grid>
