@@ -31,10 +31,8 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   image: {
-    backgroundImage:
-      "url(https://previews.123rf.com/images/sanumko/sanumko1808/sanumko180800008/106180119-vector-back-to-school-doodle-elements-pattern-or-background-study-and-learning-objects-book-notebook.jpg)",
+    backgroundImage: "url(https://i.ibb.co/9rN70yC/bgrev.png)",
     backgroundRepeat: "no-repeat",
-
     backgroundSize: "cover",
     backgroundPosition: "center",
   },
@@ -43,11 +41,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-    backgroundImage: "../../assert/learny.jpg",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -85,12 +78,11 @@ export const Login = () => {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={false} sm={4} md={8} className={classes.image} />
+      <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            {/* <LockOutlinedIcon /> */}
-          </Avatar>
+          <Avatar src="https://i.ibb.co/cv7JyXJ/hat.png"></Avatar>
+          {/*TO DO - ŚCIEŻKA */}
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
