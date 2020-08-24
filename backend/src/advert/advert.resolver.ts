@@ -62,4 +62,13 @@ export class AdvertResolver {
         const userId = ({...ctx}).id;
         return await this.advertService.editAdvert(advert, userId);
     }
+
+    @Mutation('reserve')
+    @UseGuards(GqlAuthGuard)
+    async reserve(@Args('advertId') id: string, @Context() context: ExecutionContext): Promise<AdvertDto> {
+        // @ts-ignore
+        const ctx = context.req.user;
+        const userId = ({...ctx}).id;
+        return await this.advertService.reserve(id, userId);
+    }
 }

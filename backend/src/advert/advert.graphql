@@ -7,6 +7,7 @@ type Mutation {
     addAdvert(advert: AdvertInput!):Advert
     deleteAdvert(id: uuid!): String!
     updateAdvert(advert: UpdateAdvertInput!): Advert
+    reserve(advertId: uuid!): Advert
 }
 
 type Advert{
