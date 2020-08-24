@@ -2,7 +2,8 @@ import {PlaceType} from '../placeType';
 import {LevelType} from '../advertLevelType';
 import {Timestamp} from 'typeorm';
 import {SubjectDto} from '../../subject/subjectDto';
-import {User} from '../../user/entity/user.entity';
+import {UserEntity} from '../../user/entity/user.entity';
+import {UserDto} from "../../user/dto/userDto";
 
 export class AdvertDto {
     id: string;
@@ -13,7 +14,7 @@ export class AdvertDto {
     time: Timestamp;
     price: number;
     subject: SubjectDto;
-    teacher: User;
+    teacher: UserDto;
 
     constructor(id: string,
                 place: PlaceType,
@@ -23,7 +24,7 @@ export class AdvertDto {
                 time: Timestamp,
                 price: number,
                 subject: SubjectDto,
-                teacher: User) {
+                teacher: UserDto) {
         this.id = id;
         this.place = place;
         this.level = level;

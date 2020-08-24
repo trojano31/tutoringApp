@@ -1,4 +1,4 @@
-import { Address } from '../entity/address.entity';
+import {CityEntity} from '../entity/city.entity';
 
 export interface IUser {
   email: string;
@@ -6,5 +6,5 @@ export interface IUser {
   firstName: string;
   lastName: string;
   phone: string;
-  address: Address;
+  city: CityEntity;
 }

@@ -2,7 +2,7 @@ import {Column, Entity, JoinTable, ManyToOne, Timestamp} from 'typeorm';
 import {BaseModel} from '../../../bases/BaseModel';
 import {IAdvert} from '../interface/advert.interface';
 import {PlaceType} from '../placeType';
-import {User} from '../../user/entity/user.entity';
+import {UserEntity} from '../../user/entity/user.entity';
 import {SubjectEntity} from '../../subject/entity/subject.entity';
 import {LevelType} from '../advertLevelType';
 
@@ -24,12 +24,12 @@ export class AdvertEntity extends BaseModel implements IAdvert {
     price: number;
     @Column('time')
     time: Timestamp;
-    @ManyToOne(type => User, user => user.teacherAdverts)
-    teacher: User;
+    @ManyToOne(type => UserEntity, user => user.teacherAdverts)
+    teacher: UserEntity;
     @Column({nullable: false})
     teacherId: string;
-    @ManyToOne(type => User, user => user.studentAdverts)
-    student: User;
+    @ManyToOne(type => UserEntity, user => user.studentAdverts)
+    student: UserEntity;
     @Column({nullable: true})
     studentId: string;
     @ManyToOne(type => SubjectEntity, subject => subject.advert)
