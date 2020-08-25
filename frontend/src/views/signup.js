@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
+import React, { useEffect, useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 // import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import CardMedia from "@material-ui/core/CardMedia";
+import Typography from '@material-ui/core/Typography';
+import CardMedia from '@material-ui/core/CardMedia';
 
-import { makeStyles } from "@material-ui/core/styles";
-import { useForm } from "react-hook-form";
-import cogoToast from "cogo-toast";
+import { makeStyles } from '@material-ui/core/styles';
+import { useForm } from 'react-hook-form';
+import cogoToast from 'cogo-toast';
 
 const ADD_USER = gql`
   mutation createUser($user: UserInput!) {
@@ -31,23 +31,23 @@ const ADD_USER = gql`
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100vh",
+    height: '100vh',
   },
   image: {
-    backgroundImage: "url(https://i.ibb.co/9rN70yC/bgrev.png)",
-    backgroundRepeat: "no-repeat",
+    backgroundImage: 'url(https://i.ibb.co/9rN70yC/bgrev.png)',
+    backgroundRepeat: 'no-repeat',
 
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -64,10 +64,10 @@ export const SignUp = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    register({ name: "email" }, { required: true });
-    register({ name: "firstName" }, { required: true });
-    register({ name: "lastName" }, { required: true });
-    register({ name: "password" }, { required: true });
+    register({ name: 'email' }, { required: true });
+    register({ name: 'firstName' }, { required: true });
+    register({ name: 'lastName' }, { required: true });
+    register({ name: 'password' }, { required: true });
   }, []);
 
   const {
@@ -77,11 +77,11 @@ export const SignUp = () => {
     setValue,
     triggerValidation,
   } = useForm({
-    mode: "onBlur",
+    mode: 'onBlur',
   });
   const onSubmit = (data, e) => {
-    console.log("Submit event", e);
-    cogoToast.success("Konto zalozone");
+    console.log('Submit event', e);
+    cogoToast.success('Konto zalozone');
   };
 
   return (
@@ -110,10 +110,10 @@ export const SignUp = () => {
                 required: true,
                 pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               })}
-              onChange={async (e, { name, value }) => {
+              onChange={async (e) => {
                 setEmail(e.target.value);
-                setValue(name, value);
-                await triggerValidation({ name });
+                setValue(e.target.name, e.target.value);
+                await triggerValidation({ name: e.target.name });
               }}
               error={errors.login && <p>This is required</p>}
             />
@@ -126,10 +126,10 @@ export const SignUp = () => {
               name="firstName"
               type="text"
               id="form-input-control-first-name"
-              onChange={async (e, { name, value }) => {
+              onChange={async (e) => {
                 setFirstName(e.target.value);
-                setValue(name, value);
-                await triggerValidation({ name });
+                setValue(e.target.name, e.target.value);
+                await triggerValidation({ name: e.target.name });
               }}
               ref={register({ required: true, maxLength: 80 })}
               error={errors.firstName && <p>This is required</p>}
@@ -142,13 +142,13 @@ export const SignUp = () => {
               fullWidth
               placeholder="Last Name"
               name="lastName"
-              type="password"
+              type="text"
               id="form-input-control-last-name"
               autoComplete="current-name"
-              onChange={async (e, { name, value }) => {
+              onChange={async (e) => {
                 setLastName(e.target.value);
-                setValue(name, value);
-                await triggerValidation({ name });
+                setValue(e.target.name, e.target.value);
+                await triggerValidation({ name: e.target.name });
               }}
               ref={register({ required: true })}
               error={errors.lastName && <p>This is required</p>}
@@ -164,10 +164,10 @@ export const SignUp = () => {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={async (e, { name, value }) => {
+              onChange={async (e) => {
                 setHashedPwd(e.target.value);
-                setValue(name, value);
-                await triggerValidation({ name });
+                setValue(e.target.name, e.target.value);
+                await triggerValidation({ name: e.target.name });
               }}
               ref={register({ required: true })}
               error={errors.password && <p>This is required</p>}
@@ -191,7 +191,7 @@ export const SignUp = () => {
               </Grid>
               <Grid item>
                 <Link href="login" variant="body2">
-                  {"Already have an account? Sign In"}
+                  {'Already have an account? Sign In'}
                 </Link>
               </Grid>
             </Grid>
@@ -202,11 +202,12 @@ export const SignUp = () => {
     </Grid>
   );
 
-  function handleSignupClick() {
+  function handleSignupClick(e) {
+    e.preventDefault()
     addUser({ variables: { user: { email, firstName, lastName, hashedPwd } } })
-      .then((data) => console.log("data", data))
+      .then((data) => console.log('data', data))
       .catch(() => {
-        cogoToast.error("Complete all fields");
+        cogoToast.error('Complete all fields');
       });
   }
 };
