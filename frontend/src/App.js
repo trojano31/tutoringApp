@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ApolloProvider } from "@apollo/react-hooks";
-import { Button, Menu } from "semantic-ui-react";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import client from "./shared/client";
 import "./App.css";
@@ -16,21 +18,21 @@ function App() {
       <ApolloProvider client={client}>
         <Router>
           <Menu>
-            <Menu.Item>
+            <MenuItem>
               <Button>
                 <Link to="/signup">Sign Up</Link>
               </Button>
-            </Menu.Item>
-            <Menu.Item>
+            </MenuItem>
+            <MenuItem>
               <Button>
                 <Link to="/login">Login</Link>
               </Button>
-            </Menu.Item>
-            <Menu.Item>
+            </MenuItem>
+            <MenuItem>
               <Button>
                 <Link to="/fetch">Fetch</Link>
               </Button>
-            </Menu.Item>
+            </MenuItem>
           </Menu>
 
           <Switch>
