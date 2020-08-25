@@ -41,8 +41,8 @@ input UserInput {
   firstName: String!
   lastName: String!
   password: String!
-  phoneNumber: String!
-  city: String!
+  phoneNumber: String
+  city: String
 }
 
 scalar uuid

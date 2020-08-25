@@ -24,7 +24,6 @@ const ADD_USER = gql`
       email
       firstName
       lastName
-      hashedPwd
     }
   }
 `;
@@ -63,13 +62,6 @@ export const SignUp = () => {
   const [addUser] = useMutation(ADD_USER);
   const classes = useStyles();
 
-  useEffect(() => {
-    register({ name: 'email' }, { required: true });
-    register({ name: 'firstName' }, { required: true });
-    register({ name: 'lastName' }, { required: true });
-    register({ name: 'password' }, { required: true });
-  }, []);
-
   const {
     register,
     errors,
@@ -79,6 +71,14 @@ export const SignUp = () => {
   } = useForm({
     mode: 'onBlur',
   });
+
+  useEffect(() => {
+    register({ name: 'email' }, { required: true });
+    register({ name: 'firstName' }, { required: true });
+    register({ name: 'lastName' }, { required: true });
+    register({ name: 'password' }, { required: true });
+  }, []);
+
   const onSubmit = (data, e) => {
     console.log('Submit event', e);
     cogoToast.success('Konto zalozone');
@@ -204,7 +204,7 @@ export const SignUp = () => {
 
   function handleSignupClick(e) {
     e.preventDefault()
-    addUser({ variables: { user: { email, firstName, lastName, hashedPwd } } })
+    addUser({ variables: { user: { email, firstName, lastName, password: hashedPwd } } })
       .then((data) => console.log('data', data))
       .catch(() => {
         cogoToast.error('Complete all fields');

@@ -31,7 +31,6 @@ const FETCH_USER = gql`
       id
       lastName
       firstName
-      hashedPwd
     }
   }
 `;
@@ -77,7 +76,7 @@ export const MainView = () => {
   );
 
   function handleSignupClick() {
-    addUser({ variables: { user: { email, firstName, lastName, hashedPwd } } }).then((data) =>
+    addUser({ variables: { user: { email, firstName, lastName, password: hashedPwd } } }).then((data) =>
       console.log("data", data)
     );
   }

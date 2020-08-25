@@ -11,7 +11,6 @@ const FETCH_USER = gql`
       id
       lastName
       firstName
-      hashedPwd
     }
   }
 `;

@@ -105,10 +105,10 @@ export const Login = () => {
                 required: true,
                 pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               })}
-              onChange={async (e, { name, value }) => {
+              onChange={async (e) => {
                 setLogin(e.target.value);
-                setValue(name, value);
-                await triggerValidation({ name });
+                setValue(e.target.name, e.target.value);
+                await triggerValidation({ name: e.target.name });
               }}
               error={errors.login && <p>This is required</p>}
             />
@@ -124,10 +124,10 @@ export const Login = () => {
               autoComplete="current-password"
               error={errors.password && <p>This is required</p>}
               ref={register({ required: true })}
-              onChange={async (e, { name, value }) => {
+              onChange={async (e) => {
                 setPassword(e.target.value);
-                setValue(name, value);
-                await triggerValidation({ password });
+                setValue(e.target.name, e.target.value);
+                await triggerValidation({ password: e.target.password });
               }}
             />
 
