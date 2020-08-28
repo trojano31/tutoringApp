@@ -3,18 +3,20 @@ import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 // import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
-import cogoToast from "cogo-toast";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import NativeSelect from "@material-ui/core/NativeSelect";
+import InputBase from "@material-ui/core/InputBase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,35 +35,113 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 1),
   },
 }));
 
 export const CreateAdvertFormv2 = () => {
+  const [city, setCity] = React.useState("");
+  const handleChange = (event) => {
+    setCity(event.target.value);
+  };
   const classes = useStyles();
 
   return (
     <div className={classes.paper}>
       <Avatar src="https://i.ibb.co/cv7JyXJ/hat.png"></Avatar>
-      {/*TO DO - ŚCIEŻKA */}
       <Typography component="h1" variant="h5">
-        Sign in
+        Dodaj lekcje
       </Typography>
       <form className={classes.form} noValidate>
+        <Box mt={3}></Box>
+
+        <FormControl fullWidth variant="outlined">
+          <InputLabel>Przedmiot</InputLabel>
+          <Select
+            native
+            onChange={handleChange}
+            label="Przedmiot"
+            inputProps={{
+              name: "przedmiot",
+              id: "outlined-age-native-simple",
+            }}
+          >
+            <option aria-label="None" value="" />
+            <option>Przedmiot1</option>
+            <option>Przedmiot2</option>
+            <option>Przedmiot3</option>
+          </Select>
+        </FormControl>
+
+        <Box mt={3}></Box>
+
+        <FormControl fullWidth variant="outlined">
+          <InputLabel>Miejsce</InputLabel>
+          <Select
+            native
+            onChange={handleChange}
+            label="Miejsce"
+            inputProps={{
+              name: "place",
+              id: "outlined-age-native-simple",
+            }}
+          >
+            <option aria-label="None" value="" />
+            <option>Miejsce1</option>
+            <option>Miejsce2</option>
+            <option>Miejsce3</option>
+          </Select>
+        </FormControl>
+        <Box mt={3}></Box>
+
+        <FormControl fullWidth variant="outlined">
+          <InputLabel>Poziom</InputLabel>
+          <Select
+            native
+            onChange={handleChange}
+            label="Poziom"
+            inputProps={{
+              name: "level",
+              id: "outlined-age-native-simple",
+            }}
+          >
+            <option aria-label="None" value="" />
+            <option>Poziom1</option>
+            <option>Poziom2</option>
+            <option>Poziom3</option>
+          </Select>
+        </FormControl>
+        <Box mt={3}></Box>
+
         <TextField
           variant="outlined"
           margin="normal"
           required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="login"
-          autoComplete="email"
-          autoFocus
+          id="date"
+          label="Od"
+          type="date"
+          defaultValue="2020-05-24"
+          className={classes.textField}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          id="date"
+          label="Do"
+          type="date"
+          defaultValue="2020-05-24"
+          className={classes.textField}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <TextField
           variant="outlined"
@@ -82,21 +162,15 @@ export const CreateAdvertFormv2 = () => {
           color="primary"
           className={classes.submit}
         >
-          Sign In
+          Dodaj lekcje
         </Button>
-        <Grid container>
-          <Grid item xs>
-            <Link href="#" variant="body2">
-              Forgot password?
-            </Link>
-          </Grid>
-          <Grid item>
-            <Link href="signup" variant="body2">
-              {"Don't have an account? Sign Up"}
-            </Link>
-          </Grid>
-        </Grid>
-        <Box mt={5}></Box>
+        <Box mt={2}></Box>
+
+        <Button color="secondary" fullWidth variant="outlined">
+          Wyczysc
+        </Button>
+
+        <Box mt={2}></Box>
       </form>
     </div>
   );

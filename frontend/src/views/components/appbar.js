@@ -1,13 +1,12 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
+import MenuIcon from "@material-ui/icons/Menu";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-
-import { CreateAdvertFormv2 } from "../advert/createAdvertFormv2";
 
 const drawerWidth = 240;
 
@@ -31,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    backgroundColor: "#4d79ff",
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -65,7 +65,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const AppBar = () => {
+export const MyAppBar = () => {
+  const [open, setOpen] = React.useState(true);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+  const classes = useStyles();
+
   return (
     <AppBar
       position="absolute"
