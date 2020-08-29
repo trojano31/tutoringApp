@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
@@ -15,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
 import cogoToast from "cogo-toast";
-import { LOGIN } from '../mutations';
+import { LOGIN } from "../mutations";
 import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -68,8 +66,8 @@ export const Login = () => {
     cogoToast.success("OK");
   };
 
-  if(redirect) {
-    return <Redirect to="/dashboard" />
+  if (redirect) {
+    return <Redirect to="/dashboard" />;
   }
 
   return (
@@ -100,7 +98,6 @@ export const Login = () => {
               autoFocus
               ref={register({
                 required: true,
-                pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               })}
               onChange={async (e) => {
                 setLogin(e.target.value);

@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
+import React, { useEffect, useState } from "react";
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
 // import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from '@material-ui/core/Typography';
-import CardMedia from '@material-ui/core/CardMedia';
+import Typography from "@material-ui/core/Typography";
 
-import { makeStyles } from '@material-ui/core/styles';
-import { useForm } from 'react-hook-form';
-import cogoToast from 'cogo-toast';
-import { LOGIN } from '../mutations';
+import { makeStyles } from "@material-ui/core/styles";
+import { useForm } from "react-hook-form";
+import cogoToast from "cogo-toast";
+import { LOGIN } from "../mutations";
 import { Redirect } from "react-router-dom";
 
 const ADD_USER = gql`
@@ -32,23 +30,23 @@ const ADD_USER = gql`
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: "100vh",
   },
   image: {
-    backgroundImage: 'url(https://i.ibb.co/9rN70yC/bgrev.png)',
-    backgroundRepeat: 'no-repeat',
+    backgroundImage: "url(https://i.ibb.co/9rN70yC/bgrev.png)",
+    backgroundRepeat: "no-repeat",
 
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -66,30 +64,19 @@ export const SignUp = () => {
   const [loginUser] = useMutation(LOGIN);
   const classes = useStyles();
 
-  const {
-    register,
-    errors,
-    handleSubmit,
-    setValue,
-    triggerValidation,
-  } = useForm({
-    mode: 'onBlur',
+  const { register, errors, setValue, triggerValidation } = useForm({
+    mode: "onBlur",
   });
 
   useEffect(() => {
-    register({ name: 'email' }, { required: true });
-    register({ name: 'firstName' }, { required: true });
-    register({ name: 'lastName' }, { required: true });
-    register({ name: 'password' }, { required: true });
+    register({ name: "email" }, { required: true });
+    register({ name: "firstName" }, { required: true });
+    register({ name: "lastName" }, { required: true });
+    register({ name: "password" }, { required: true });
   }, []);
 
-  const onSubmit = (data, e) => {
-    console.log('Submit event', e);
-    cogoToast.success('Konto zalozone');
-  };
-
-  if(redirect) {
-    return <Redirect to="/dashboard" />
+  if (redirect) {
+    return <Redirect to="/dashboard" />;
   }
 
   return (
@@ -116,7 +103,6 @@ export const SignUp = () => {
               autoFocus
               ref={register({
                 required: true,
-                pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               })}
               onChange={async (e) => {
                 setEmail(e.target.value);
@@ -199,7 +185,7 @@ export const SignUp = () => {
               </Grid>
               <Grid item>
                 <Link href="login" variant="body2">
-                  {'Already have an account? Sign In'}
+                  {"Already have an account? Sign In"}
                 </Link>
               </Grid>
             </Grid>
@@ -211,15 +197,19 @@ export const SignUp = () => {
   );
 
   function handleSignupClick(e) {
-    e.preventDefault()
-    addUser({ variables: { user: { email, firstName, lastName, password: hashedPwd } } })
+    e.preventDefault();
+    addUser({
+      variables: { user: { email, firstName, lastName, password: hashedPwd } },
+    })
       .then((data) => {
         loginUser({ variables: { loginInput: { email, password: hashedPwd } } })
           .then(() => setRedirect(true))
-          .catch(() => cogoToast.error('Something went wrong, try again later'))
+          .catch(() =>
+            cogoToast.error("Something went wrong, try again later")
+          );
       })
       .catch(() => {
-        cogoToast.error('Complete all fields');
+        cogoToast.error("Complete all fields");
       });
   }
 };

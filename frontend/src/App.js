@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ApolloProvider } from "@apollo/react-hooks";
 import Button from "@material-ui/core/Button";
@@ -11,7 +11,6 @@ import "./App.css";
 import { Login } from "./views/login";
 import { SignUp } from "./views/signup";
 import { Fetch } from "./views/fetch";
-import { CreateAdvertForm } from "./views/advert/createAdvertForm";
 import { AddAdvert } from "./views/advert/addAdvert";
 
 function App() {
