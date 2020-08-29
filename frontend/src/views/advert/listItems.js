@@ -8,42 +8,50 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import ContactsIcon from "@material-ui/icons/Contacts";
 import MessageIcon from "@material-ui/icons/Message";
 import Divider from "@material-ui/core/Divider";
+import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 
 export const mainListItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
-        <DateRangeIcon />
+        <DateRangeIcon color="primary" />
       </ListItemIcon>
       <ListItemText primary="Kalendarz" />
     </ListItem>
     <Divider />
     <ListItem button>
       <ListItemIcon>
-        <PostAddIcon />
+        <PostAddIcon color="primary" />
       </ListItemIcon>
       <ListItemText primary="Dodaj lekcje" />
     </ListItem>
     <Divider />
     <ListItem button>
       <ListItemIcon>
-        <ListAltIcon />
+        <ListAltIcon color="primary" />
       </ListItemIcon>
       <ListItemText primary="Moje lekcje" />
     </ListItem>
     <Divider />
     <ListItem button>
       <ListItemIcon>
-        <ContactsIcon />
+        <ContactsIcon color="primary" />
       </ListItemIcon>
       <ListItemText primary="Profil" />
     </ListItem>
     <Divider />
     <ListItem button>
       <ListItemIcon>
-        <MessageIcon />
+        <MessageIcon color="primary" />
       </ListItemIcon>
       <ListItemText primary="Wiadomości" />
+    </ListItem>
+    <Divider />
+    <ListItem button>
+      <ListItemIcon>
+        <PowerSettingsNewIcon color="secondary" />
+      </ListItemIcon>
+      <ListItemText primary="Wyloguj" />
     </ListItem>
     <Divider />
   </div>

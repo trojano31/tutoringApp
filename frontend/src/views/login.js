@@ -53,13 +53,7 @@ export const Login = () => {
     register({ name: "password" }, { required: true });
   }, []);
 
-  const {
-    register,
-    errors,
-    handleSubmit,
-    setValue,
-    triggerValidation,
-  } = useForm({
+  const { register, errors, handleSubmit, setValue } = useForm({
     mode: "onBlur",
   });
   const onSubmit = (data, e) => {

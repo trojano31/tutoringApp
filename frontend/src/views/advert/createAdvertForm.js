@@ -1,37 +1,37 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import { LEVELS, SUBJECTS, PLACES } from './constants';
-import { useForm, Controller } from 'react-hook-form';
-import { useMutation } from '@apollo/react-hooks';
-import { CREATE_ADVERT } from '../../mutations';
+import React from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { LEVELS, SUBJECTS, PLACES } from "./constants";
+import { useForm, Controller } from "react-hook-form";
+import { useMutation } from "@apollo/react-hooks";
+import { CREATE_ADVERT } from "../../mutations";
 import cogoToast from "cogo-toast";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: "100vh",
   },
   image: {
-    backgroundImage: 'url(https://i.ibb.co/9rN70yC/bgrev.png)',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundImage: "url(https://i.ibb.co/9rN70yC/bgrev.png)",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   form: {
-    width: '100%',
+    width: "100%",
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -44,14 +44,17 @@ export const CreateAdvertForm = () => {
   const { control, handleSubmit } = useForm();
   const [createAdvert] = useMutation(CREATE_ADVERT);
 
-
   return (
     <div className={classes.paper}>
       <Avatar src="https://i.ibb.co/cv7JyXJ/hat.png" />
       <Typography component="h1" variant="h5">
         Dodaj lekcje
       </Typography>
-      <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={classes.form}
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Box mt={3} />
 
         <FormControl fullWidth variant="outlined">
@@ -63,18 +66,20 @@ export const CreateAdvertForm = () => {
               <Select
                 native
                 onBlur={onBlur}
-                onChange={e => onChange(e.target.value)}
+                onChange={(e) => onChange(e.target.value)}
                 value={value}
                 name={name}
                 label="Przedmiot"
                 inputProps={{
-                  name: 'przedmiot',
-                  id: 'outlined-age-native-simple',
+                  name: "przedmiot",
+                  id: "outlined-age-native-simple",
                 }}
               >
                 <option aria-label="None" value="" />
                 {SUBJECTS.map((item, i) => (
-                  <option key={i} value={item.value}>{item.name}</option>
+                  <option key={i} value={item.value}>
+                    {item.name}
+                  </option>
                 ))}
               </Select>
             )}
@@ -92,18 +97,20 @@ export const CreateAdvertForm = () => {
               <Select
                 native
                 onBlur={onBlur}
-                onChange={e => onChange(e.target.value)}
+                onChange={(e) => onChange(e.target.value)}
                 value={value}
                 name={name}
                 label="Miejsce"
                 inputProps={{
-                  name: 'place',
-                  id: 'outlined-age-native-simple',
+                  name: "place",
+                  id: "outlined-age-native-simple",
                 }}
               >
                 <option aria-label="None" value="" />
                 {PLACES.map((item, i) => (
-                  <option key={i} value={item.value}>{item.name}</option>
+                  <option key={i} value={item.value}>
+                    {item.name}
+                  </option>
                 ))}
               </Select>
             )}
@@ -120,18 +127,20 @@ export const CreateAdvertForm = () => {
               <Select
                 native
                 onBlur={onBlur}
-                onChange={e => onChange(e.target.value)}
+                onChange={(e) => onChange(e.target.value)}
                 value={value}
                 name={name}
                 label="Poziom"
                 inputProps={{
-                  name: 'level',
-                  id: 'outlined-age-native-simple',
+                  name: "level",
+                  id: "outlined-age-native-simple",
                 }}
               >
                 <option aria-label="None" value="" />
                 {LEVELS.map((item, i) => (
-                  <option key={i} value={item.value}>{item.name}</option>
+                  <option key={i} value={item.value}>
+                    {item.name}
+                  </option>
                 ))}
               </Select>
             )}
@@ -146,7 +155,7 @@ export const CreateAdvertForm = () => {
           render={({ onChange, onBlur, value, name }) => (
             <TextField
               onBlur={onBlur}
-              onChange={e => onChange(e.target.value)}
+              onChange={(e) => onChange(e.target.value)}
               value={value}
               name={name}
               variant="outlined"
@@ -171,7 +180,7 @@ export const CreateAdvertForm = () => {
           render={({ onChange, onBlur, value, name }) => (
             <TextField
               onBlur={onBlur}
-              onChange={e => onChange(e.target.value)}
+              onChange={(e) => onChange(e.target.value)}
               value={value}
               name={name}
               variant="outlined"
@@ -195,7 +204,7 @@ export const CreateAdvertForm = () => {
           render={({ onChange, onBlur, value, name }) => (
             <TextField
               onBlur={onBlur}
-              onChange={e => onChange(e.target.value)}
+              onChange={(e) => onChange(e.target.value)}
               value={value}
               name={name}
               variant="outlined"
@@ -237,11 +246,11 @@ export const CreateAdvertForm = () => {
       dateFrom: new Date(data.dateFrom).toISOString(),
       dateTo: new Date(data.dateTo).toISOString(),
       price: Number(data.price),
-      teacherId: '1f6ec8cd-2aa7-423f-aa0c-3c3c48cb75e6' // ogaranc globalny state
+      teacherId: "1f6ec8cd-2aa7-423f-aa0c-3c3c48cb75e6", // ogaranc globalny state
     };
     createAdvert({ variables: { advert: { ...preparedData } } })
-      .then(res => console.log(res))
-      .catch(() => cogoToast.error('Something went wrong'))
-    console.log('data', preparedData)
+      .then((res) => console.log(res))
+      .catch(() => cogoToast.error("Something went wrong"));
+    console.log("data", preparedData);
   }
 };
