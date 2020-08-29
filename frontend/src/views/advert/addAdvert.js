@@ -15,7 +15,7 @@ import Link from "@material-ui/core/Link";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems } from "./listItems";
-import { CreateAdvertFormv2 } from "../advert/createAdvertFormv2";
+import { CreateAdvertForm } from "./createAdvertForm";
 import { MyAppBar } from "../components/appbar";
 import { Footer } from "../components/footer";
 
@@ -108,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Dashboard = () => {
+export const AddAdvert = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -141,7 +141,7 @@ export const Dashboard = () => {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="md" className={classes.container}>
           <Paper>
-            <CreateAdvertFormv2 />
+            <CreateAdvertForm />
           </Paper>
           <Footer />
         </Container>

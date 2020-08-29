@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
+import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-// import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { LEVELS, SUBJECTS, CITIES } from "./constants";
 import { useForm } from "react-hook-form";
-import cogoToast from "cogo-toast";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,78 +28,146 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(3, 0, 1),
   },
 }));
 
 export const CreateAdvertForm = () => {
+  const [city, setCity] = React.useState("");
+  const handleChange = (event) => {
+    setCity(event.target.value);
+  };
   const classes = useStyles();
+  const { control } = useForm();
 
   return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={2} className={classes.image} />
-      {/* Tutaj wrzucimy komponent menu bocznego */}
-      <Grid item xs={12} sm={8} md={10} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar src="https://i.ibb.co/cv7JyXJ/hat.png"></Avatar>
-          {/*TO DO - ŚCIEŻKA */}
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="login"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
+    <div className={classes.paper}>
+      <Avatar src="https://i.ibb.co/cv7JyXJ/hat.png" />
+      <Typography component="h1" variant="h5">
+        Dodaj lekcje
+      </Typography>
+      <form className={classes.form} noValidate>
+        <Box mt={3} />
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="outlined"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-            <Box mt={5}></Box>
-          </form>
-        </div>
-      </Grid>
-    </Grid>
+        <FormControl fullWidth variant="outlined">
+          <InputLabel>Przedmiot</InputLabel>
+          <Select
+            native
+            onChange={handleChange}
+            label="Przedmiot"
+            inputProps={{
+              name: "przedmiot",
+              id: "outlined-age-native-simple",
+            }}
+          >
+            {SUBJECTS.map((item, i) => (
+              <option key={i} value={item.value}>
+                {item.name}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
+
+        <Box mt={3} />
+
+        <FormControl fullWidth variant="outlined">
+          <InputLabel>Miejsce</InputLabel>
+          <Select
+            native
+            onChange={handleChange}
+            label="Miejsce"
+            inputProps={{
+              name: "place",
+              id: "outlined-age-native-simple",
+            }}
+          >
+            {CITIES.map((item, i) => (
+              <option key={i} value={item.value}>
+                {item.name}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
+        <Box mt={3} />
+
+        <FormControl fullWidth variant="outlined">
+          <InputLabel>Poziom</InputLabel>
+          <Select
+            native
+            onChange={handleChange}
+            label="Poziom"
+            inputProps={{
+              name: "level",
+              id: "outlined-age-native-simple",
+            }}
+          >
+            {LEVELS.map((item, i) => (
+              <option key={i} value={item.value}>
+                {item.name}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
+        <Box mt={3} />
+
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          id="dateFrom"
+          label="Od"
+          type="dateFrom"
+          defaultValue="2020-05-24"
+          className={classes.textField}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          id="dateTo"
+          label="Do"
+          type="dateTo"
+          defaultValue="2020-05-24"
+          className={classes.textField}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="price"
+          label="Cena (za godzinę zegarową)"
+          type="number"
+          id="price"
+        />
+
+        <Button
+          type="submit"
+          fullWidth
+          variant="outlined"
+          color="primary"
+          className={classes.submit}
+        >
+          Dodaj lekcje
+        </Button>
+        <Box mt={2} />
+
+        <Button color="secondary" fullWidth variant="outlined">
+          Wyczysc
+        </Button>
+
+        <Box mt={2} />
+      </form>
+    </div>
   );
 };

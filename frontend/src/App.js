@@ -12,7 +12,7 @@ import { Login } from "./views/login";
 import { SignUp } from "./views/signup";
 import { Fetch } from "./views/fetch";
 import { CreateAdvertForm } from "./views/advert/createAdvertForm";
-import { Dashboard } from "../src/views/advert/Dashboard";
+import { AddAdvert } from "./views/advert/addAdvert";
 
 function App() {
   return (
@@ -48,10 +48,7 @@ function App() {
               <Fetch />
             </Route>
             <Route path="/advert">
-              <CreateAdvertForm />
-            </Route>
-            <Route path="/dashboard">
-              <Dashboard />
+              <AddAdvert />
             </Route>
           </Switch>
         </Router>
