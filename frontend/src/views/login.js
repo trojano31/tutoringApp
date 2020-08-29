@@ -15,16 +15,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
 import cogoToast from "cogo-toast";
-
-const LOGIN = gql`
-  mutation($loginInput: LoginInput!) {
-    login(loginInput: $loginInput) {
-      email
-      id
-      lastName
-    }
-  }
-`;
+import { LOGIN } from '../mutations';
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Login = () => {
+  const [redirect, setRedirect] = useState(false);
   const [login, setLogin] = useState(null);
   const [password, setPassword] = useState(null);
   const [loginUser] = useMutation(LOGIN);
@@ -74,6 +67,10 @@ export const Login = () => {
   const onSubmit = (data, e) => {
     cogoToast.success("OK");
   };
+
+  if(redirect) {
+    return <Redirect to="/dashboard" />
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -162,7 +159,7 @@ export const Login = () => {
 
   function handleLoginClick() {
     loginUser({ variables: { loginInput: { email: login, password } } })
-      .then((loginData) => console.log("loginData", loginData))
+      .then((loginData) => setRedirect(true))
       .catch(() => {
         cogoToast.error("Wrong login or password");
       });

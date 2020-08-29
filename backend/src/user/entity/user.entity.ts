@@ -1,14 +1,14 @@
 import { BaseModel } from '../../../bases/BaseModel';
-import {BeforeInsert, Column, Entity, Index, ManyToOne, OneToMany, OneToOne} from 'typeorm';
+import { BeforeInsert, Column, Entity, Index, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 import { IUser } from '../interfaces/user.interface';
 import * as bcrypt from 'bcrypt';
-import {AdvertEntity} from '../../advert/entity/advert.entity';
-import {CityEntity} from './city.entity';
+import { AdvertEntity } from '../../advert/entity/advert.entity';
+import { CityEntity } from './city.entity';
 
 @Entity()
 export class UserEntity extends BaseModel implements IUser {
   @Column()
-  @Index({unique: true})
+  @Index({ unique: true })
   email: string;
 
   @Column()
@@ -29,7 +29,7 @@ export class UserEntity extends BaseModel implements IUser {
   @OneToMany(type => AdvertEntity, advert => advert.student)
   studentAdverts: AdvertEntity[];
 
-  @ManyToOne(type => CityEntity, city => city.users)
+  @ManyToOne(type => CityEntity, city => city.users, { nullable: true })
   city: CityEntity;
 
   @BeforeInsert()

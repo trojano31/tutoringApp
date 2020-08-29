@@ -1,41 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-// import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import { useForm } from "react-hook-form";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import NativeSelect from "@material-ui/core/NativeSelect";
-import InputBase from "@material-ui/core/InputBase";
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { LEVELS, SUBJECTS, CITIES } from './constants';
+import { useForm } from 'react-hook-form';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100vh",
+    height: '100vh',
   },
   image: {
-    backgroundImage: "url(https://i.ibb.co/9rN70yC/bgrev.png)",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+    backgroundImage: 'url(https://i.ibb.co/9rN70yC/bgrev.png)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   form: {
-    width: "100%",
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -44,20 +37,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const CreateAdvertFormv2 = () => {
-  const [city, setCity] = React.useState("");
+  const [city, setCity] = React.useState('');
   const handleChange = (event) => {
     setCity(event.target.value);
   };
   const classes = useStyles();
+  const { control } = useForm();
 
   return (
     <div className={classes.paper}>
-      <Avatar src="https://i.ibb.co/cv7JyXJ/hat.png"></Avatar>
+      <Avatar src="https://i.ibb.co/cv7JyXJ/hat.png" />
       <Typography component="h1" variant="h5">
         Dodaj lekcje
       </Typography>
       <form className={classes.form} noValidate>
-        <Box mt={3}></Box>
+        <Box mt={3} />
 
         <FormControl fullWidth variant="outlined">
           <InputLabel>Przedmiot</InputLabel>
@@ -66,18 +60,17 @@ export const CreateAdvertFormv2 = () => {
             onChange={handleChange}
             label="Przedmiot"
             inputProps={{
-              name: "przedmiot",
-              id: "outlined-age-native-simple",
+              name: 'przedmiot',
+              id: 'outlined-age-native-simple',
             }}
           >
-            <option aria-label="None" value="" />
-            <option>Przedmiot1</option>
-            <option>Przedmiot2</option>
-            <option>Przedmiot3</option>
+            {SUBJECTS.map((item, i) => (
+              <option key={i} value={item.value}>{item.name}</option>
+            ))}
           </Select>
         </FormControl>
 
-        <Box mt={3}></Box>
+        <Box mt={3} />
 
         <FormControl fullWidth variant="outlined">
           <InputLabel>Miejsce</InputLabel>
@@ -86,17 +79,16 @@ export const CreateAdvertFormv2 = () => {
             onChange={handleChange}
             label="Miejsce"
             inputProps={{
-              name: "place",
-              id: "outlined-age-native-simple",
+              name: 'place',
+              id: 'outlined-age-native-simple',
             }}
           >
-            <option aria-label="None" value="" />
-            <option>Miejsce1</option>
-            <option>Miejsce2</option>
-            <option>Miejsce3</option>
+            {CITIES.map((item, i) => (
+              <option key={i} value={item.value}>{item.name}</option>
+            ))}
           </Select>
         </FormControl>
-        <Box mt={3}></Box>
+        <Box mt={3} />
 
         <FormControl fullWidth variant="outlined">
           <InputLabel>Poziom</InputLabel>
@@ -105,25 +97,24 @@ export const CreateAdvertFormv2 = () => {
             onChange={handleChange}
             label="Poziom"
             inputProps={{
-              name: "level",
-              id: "outlined-age-native-simple",
+              name: 'level',
+              id: 'outlined-age-native-simple',
             }}
           >
-            <option aria-label="None" value="" />
-            <option>Poziom1</option>
-            <option>Poziom2</option>
-            <option>Poziom3</option>
+            {LEVELS.map((item, i) => (
+              <option key={i} value={item.value}>{item.name}</option>
+            ))}
           </Select>
         </FormControl>
-        <Box mt={3}></Box>
+        <Box mt={3} />
 
         <TextField
           variant="outlined"
           margin="normal"
           required
-          id="date"
+          id="dateFrom"
           label="Od"
-          type="date"
+          type="dateFrom"
           defaultValue="2020-05-24"
           className={classes.textField}
           InputLabelProps={{
@@ -134,9 +125,9 @@ export const CreateAdvertFormv2 = () => {
           variant="outlined"
           margin="normal"
           required
-          id="date"
+          id="dateTo"
           label="Do"
-          type="date"
+          type="dateTo"
           defaultValue="2020-05-24"
           className={classes.textField}
           InputLabelProps={{
@@ -148,11 +139,10 @@ export const CreateAdvertFormv2 = () => {
           margin="normal"
           required
           fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
+          name="price"
+          label="Cena (za godzinę zegarową)"
+          type="number"
+          id="price"
         />
 
         <Button
@@ -164,13 +154,13 @@ export const CreateAdvertFormv2 = () => {
         >
           Dodaj lekcje
         </Button>
-        <Box mt={2}></Box>
+        <Box mt={2} />
 
         <Button color="secondary" fullWidth variant="outlined">
           Wyczysc
         </Button>
 
-        <Box mt={2}></Box>
+        <Box mt={2} />
       </form>
     </div>
   );

@@ -17,6 +17,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { makeStyles } from '@material-ui/core/styles';
 import { useForm } from 'react-hook-form';
 import cogoToast from 'cogo-toast';
+import { LOGIN } from '../mutations';
+import { Redirect } from "react-router-dom";
 
 const ADD_USER = gql`
   mutation createUser($user: UserInput!) {
@@ -55,11 +57,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const SignUp = () => {
+  const [redirect, setRedirect] = useState(false);
   const [email, setEmail] = useState(null);
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [hashedPwd, setHashedPwd] = useState(null);
   const [addUser] = useMutation(ADD_USER);
+  const [loginUser] = useMutation(LOGIN);
   const classes = useStyles();
 
   const {
@@ -83,6 +87,10 @@ export const SignUp = () => {
     console.log('Submit event', e);
     cogoToast.success('Konto zalozone');
   };
+
+  if(redirect) {
+    return <Redirect to="/dashboard" />
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -205,7 +213,11 @@ export const SignUp = () => {
   function handleSignupClick(e) {
     e.preventDefault()
     addUser({ variables: { user: { email, firstName, lastName, password: hashedPwd } } })
-      .then((data) => console.log('data', data))
+      .then((data) => {
+        loginUser({ variables: { loginInput: { email, password: hashedPwd } } })
+          .then(() => setRedirect(true))
+          .catch(() => cogoToast.error('Something went wrong, try again later'))
+      })
       .catch(() => {
         cogoToast.error('Complete all fields');
       });
