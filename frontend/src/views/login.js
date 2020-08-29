@@ -105,7 +105,6 @@ export const Login = () => {
               onChange={async (e) => {
                 setLogin(e.target.value);
                 setValue(e.target.name, e.target.value);
-                await triggerValidation({ name: e.target.name });
               }}
               error={errors.login && <p>This is required</p>}
             />
@@ -124,7 +123,6 @@ export const Login = () => {
               onChange={async (e) => {
                 setPassword(e.target.value);
                 setValue(e.target.name, e.target.value);
-                await triggerValidation({ password: e.target.password });
               }}
             />
 

@@ -19,7 +19,7 @@ type Advert{
     teacher: User
     dateFrom: Date!
     dateTo: Date!
-    time: DateTime!
+    time: DateTime
 }
 
 type Adverts{
@@ -30,13 +30,14 @@ type Adverts{
 }
 
 input AdvertInput{
-    subjectId: uuid!
+    subject: String!
     place: Place
     level: Level
     dateFrom: Date!
-    dateTo: Date
-    time: DateTime!
+    dateTo: Date!
+    time: DateTime
     price: Float!
+    teacherId: String
 }
 
 input UpdateAdvertInput{

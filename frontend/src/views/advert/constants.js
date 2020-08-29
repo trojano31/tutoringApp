@@ -9,21 +9,27 @@ export const SUBJECTS = [{
   value: 'Angielski'
 }];
 
-export const CITIES = [{
-  name: 'Bielsko',
-  value: 'Bielsko'
+export const PLACES = [{
+  name: 'Online',
+  value: 'ONLINE'
 }, {
-  name: 'Warszawa',
-  value: 'Warszawa'
+  name: 'U nauczyciela',
+  value: 'AT_TEACHER'
+}, {
+  name: 'U ucznia',
+  value: 'AT_STUDENT'
 }];
 
 export const LEVELS = [{
-  name: 'Początkujący',
-  value: 'beginner'
+  name: 'Szkoła podstawowa klasy 1-4',
+  value: 'PRIMARY_SCHOOL'
 }, {
-  name: 'Średniozaawansowany',
-  value: 'medium'
+  name: 'Szkoła podstawowa klasy 5-8',
+  value: 'SECONDARY_SCHOOL'
 }, {
-  name: 'Zaawansowany',
-  value: 'expert'
+  name: 'Szkoła średnia',
+  value: 'HIGH_SCHOOL'
+}, {
+  name: 'Studia',
+  value: 'COLLEGE'
 }];

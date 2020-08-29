@@ -14,14 +14,15 @@ export const CREATE_ADVERT = gql`
   mutation($advert: AdvertInput!) {
     addAdvert(advert: $advert) {
       id
-      subject
       place
       level
       price
-      teacher
       dateFrom
       dateTo
       time
+      subject {
+        name
+      }
     }
   }
 `;
