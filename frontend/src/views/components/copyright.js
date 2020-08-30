@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 
 import Link from "@material-ui/core/Link";
 
-const Copyright = () => {
+const CopryrightText = () => {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
@@ -16,10 +16,10 @@ const Copyright = () => {
   );
 };
 
-export const Footer = () => {
+export const Copyright = () => {
   return (
     <Box pt={4}>
-      <Copyright />
+      <CopryrightText />
     </Box>
   );
 };

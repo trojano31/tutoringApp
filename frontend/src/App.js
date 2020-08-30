@@ -1,9 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ApolloProvider } from "@apollo/react-hooks";
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 
 import client from "./shared/client";
 import "./App.css";
@@ -22,7 +19,7 @@ function App() {
           <Switch>
             {/* <Route path="/">
               <Main />
-            </Route>
+            <Route>
             Patryk rzuć okiem co z tym jest nie tak plx - chyba, że u mnie coś na windowsie to odświeżanie nawala
             */}
             <Route path="/signup">

@@ -3,15 +3,19 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
+import List from "@material-ui/core/List";
+import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { mainListItems } from "./listItems";
 import { CreateAdvertForm } from "./createAdvertForm";
-import { MyAppBar } from "./appbar";
-import { Footer } from "../components/footer";
+import { Copyright } from "../components/copyright";
 
 const drawerWidth = 240;
 
@@ -35,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    backgroundColor: "#4d79ff",
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -92,10 +97,9 @@ const useStyles = makeStyles((theme) => ({
 export const AddAdvert = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  // const handleDrawerOpen = () => {
-  //   setOpen(true);
-  // };
-  // wywalam bo warning - trzeba poprawić otwieranie menu bocznego
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -103,7 +107,34 @@ export const AddAdvert = () => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <MyAppBar />
+      <AppBar
+        position="absolute"
+        className={clsx(classes.appBar, open && classes.appBarShift)}
+      >
+        <Toolbar className={classes.toolbar}>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(
+              classes.menuButton,
+              open && classes.menuButtonHidden
+            )}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            className={classes.title}
+          >
+            Learny
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <Drawer
         variant="permanent"
         classes={{
@@ -116,15 +147,19 @@ export const AddAdvert = () => {
             <ChevronLeftIcon />
           </IconButton>
         </div>
+        <Divider />
         <List>{mainListItems}</List>
+        <Divider />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="md" className={classes.container}>
-          <Paper>
-            <CreateAdvertForm />
-          </Paper>
-          <Footer />
+        <Container maxWidth="lg" className={classes.container}>
+          <Container maxWidth="md" className={classes.container}>
+            <Paper>
+              <CreateAdvertForm />
+            </Paper>
+            <Copyright />
+          </Container>
         </Container>
       </main>
     </div>
