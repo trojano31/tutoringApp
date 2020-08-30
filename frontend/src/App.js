@@ -12,32 +12,19 @@ import { Login } from "./views/login";
 import { SignUp } from "./views/signup";
 import { Fetch } from "./views/fetch";
 import { AddAdvert } from "./views/advert/addAdvert";
-import { MainAppBar } from "./views/components/appbar";
+import { Main } from "./views/main";
 
 function App() {
   return (
     <div className="App">
       <ApolloProvider client={client}>
         <Router>
-          <Menu>
-            <MenuItem>
-              <Button>
-                <Link to="/signup">Sign Up</Link>
-              </Button>
-            </MenuItem>
-            <MenuItem>
-              <Button>
-                <Link to="/login">Login</Link>
-              </Button>
-            </MenuItem>
-            <MenuItem>
-              <Button>
-                <Link to="/fetch">Fetch</Link>
-              </Button>
-            </MenuItem>
-          </Menu>
-
           <Switch>
+            {/* <Route path="/">
+              <Main />
+            </Route>
+            Patryk rzuć okiem co z tym jest nie tak plx - chyba, że u mnie coś na windowsie to odświeżanie nawala
+            */}
             <Route path="/signup">
               <SignUp />
             </Route>
@@ -49,9 +36,6 @@ function App() {
             </Route>
             <Route path="/advert">
               <AddAdvert />
-            </Route>
-            <Route path="/main">
-              <MainAppBar />
             </Route>
           </Switch>
         </Router>
