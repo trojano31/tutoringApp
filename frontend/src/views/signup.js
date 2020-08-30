@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import cogoToast from "cogo-toast";
 import { LOGIN } from "../mutations";
 import { Redirect } from "react-router-dom";
+import { MainAppBar } from "./components/appbar";
 
 const ADD_USER = gql`
   mutation createUser($user: UserInput!) {
@@ -80,120 +81,123 @@ export const SignUp = () => {
   }
 
   return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={8} className={classes.image} />
-      <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar src="https://i.ibb.co/cv7JyXJ/hat.png"></Avatar>
-          {/*TO DO - ŚCIEŻKA */}
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              ref={register({
-                required: true,
-              })}
-              onChange={async (e) => {
-                setEmail(e.target.value);
-                setValue(e.target.name, e.target.value);
-                await triggerValidation({ name: e.target.name });
-              }}
-              error={errors.login && <p>This is required</p>}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              placeholder="First Name"
-              name="firstName"
-              type="text"
-              id="form-input-control-first-name"
-              onChange={async (e) => {
-                setFirstName(e.target.value);
-                setValue(e.target.name, e.target.value);
-                await triggerValidation({ name: e.target.name });
-              }}
-              ref={register({ required: true, maxLength: 80 })}
-              error={errors.firstName && <p>This is required</p>}
-            />
+    <React.Fragment>
+      <MainAppBar />
+      <Grid container component="main" className={classes.root}>
+        <CssBaseline />
+        <Grid item xs={false} sm={4} md={8} className={classes.image} />
+        <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
+          <div className={classes.paper}>
+            <Avatar src="https://i.ibb.co/cv7JyXJ/hat.png"></Avatar>
+            {/*TO DO - ŚCIEŻKA */}
+            <Typography component="h1" variant="h5">
+              Sign up
+            </Typography>
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                ref={register({
+                  required: true,
+                })}
+                onChange={async (e) => {
+                  setEmail(e.target.value);
+                  setValue(e.target.name, e.target.value);
+                  await triggerValidation({ name: e.target.name });
+                }}
+                error={errors.login && <p>This is required</p>}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                placeholder="First Name"
+                name="firstName"
+                type="text"
+                id="form-input-control-first-name"
+                onChange={async (e) => {
+                  setFirstName(e.target.value);
+                  setValue(e.target.name, e.target.value);
+                  await triggerValidation({ name: e.target.name });
+                }}
+                ref={register({ required: true, maxLength: 80 })}
+                error={errors.firstName && <p>This is required</p>}
+              />
 
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              placeholder="Last Name"
-              name="lastName"
-              type="text"
-              id="form-input-control-last-name"
-              autoComplete="current-name"
-              onChange={async (e) => {
-                setLastName(e.target.value);
-                setValue(e.target.name, e.target.value);
-                await triggerValidation({ name: e.target.name });
-              }}
-              ref={register({ required: true })}
-              error={errors.lastName && <p>This is required</p>}
-            />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                placeholder="Last Name"
+                name="lastName"
+                type="text"
+                id="form-input-control-last-name"
+                autoComplete="current-name"
+                onChange={async (e) => {
+                  setLastName(e.target.value);
+                  setValue(e.target.name, e.target.value);
+                  await triggerValidation({ name: e.target.name });
+                }}
+                ref={register({ required: true })}
+                error={errors.lastName && <p>This is required</p>}
+              />
 
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={async (e) => {
-                setHashedPwd(e.target.value);
-                setValue(e.target.name, e.target.value);
-                await triggerValidation({ name: e.target.name });
-              }}
-              ref={register({ required: true })}
-              error={errors.password && <p>This is required</p>}
-            />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={async (e) => {
+                  setHashedPwd(e.target.value);
+                  setValue(e.target.name, e.target.value);
+                  await triggerValidation({ name: e.target.name });
+                }}
+                ref={register({ required: true })}
+                error={errors.password && <p>This is required</p>}
+              />
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="outlined"
-              color="primary"
-              className={classes.submit}
-              onClick={handleSignupClick}
-            >
-              Sign Up
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+              <Button
+                type="submit"
+                fullWidth
+                variant="outlined"
+                color="primary"
+                className={classes.submit}
+                onClick={handleSignupClick}
+              >
+                Sign Up
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="login" variant="body2">
+                    {"Already have an account? Sign In"}
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="login" variant="body2">
-                  {"Already have an account? Sign In"}
-                </Link>
-              </Grid>
-            </Grid>
-            <Box mt={5}></Box>
-          </form>
-        </div>
+              <Box mt={5}></Box>
+            </form>
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
+    </React.Fragment>
   );
 
   function handleSignupClick(e) {

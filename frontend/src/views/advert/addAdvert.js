@@ -10,7 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { mainListItems } from "./listItems";
 import { CreateAdvertForm } from "./createAdvertForm";
-import { MyAppBar } from "../components/appbar";
+import { MyAppBar } from "./appbar";
 import { Footer } from "../components/footer";
 
 const drawerWidth = 240;
