@@ -3,7 +3,7 @@ import {LevelType} from '../advertLevelType';
 import {Timestamp} from 'typeorm';
 
 export class AddAdvertDto {
-    subjectId: string;
+    subject: string;
     teacherId: string;
     place: PlaceType;
     level: LevelType;
@@ -12,7 +12,7 @@ export class AddAdvertDto {
     time: Timestamp;
     price: number;
 
-    constructor(subjectId: string,
+    constructor(subject: string,
                 teacherId: string,
                 place: PlaceType,
                 level: LevelType,
@@ -20,7 +20,7 @@ export class AddAdvertDto {
                 dateTo: Date,
                 time: Timestamp,
                 price: number) {
-        this.subjectId = subjectId;
+        this.subject = subject;
         this.teacherId = teacherId;
         this.place = place;
         this.level = level;

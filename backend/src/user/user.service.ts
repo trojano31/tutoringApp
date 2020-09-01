@@ -76,7 +76,7 @@ export class UserService {
     }
 
     async create(user: AddUserDto): Promise<UserEntity> {
-        const city = await this.cityService.createIfNotExists('ddopa');
+        const city = user.city ? await this.cityService.createIfNotExists('ddopa') : null;
         const userModel = UserEntity.create(new UserEntity(user.email,
             user.password,
             user.firstName,
