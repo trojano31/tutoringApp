@@ -109,7 +109,6 @@ export const SignUp = () => {
                 onChange={async (e) => {
                   setEmail(e.target.value);
                   setValue(e.target.name, e.target.value);
-                  await triggerValidation({ name: e.target.name });
                 }}
                 error={errors.login && <p>This is required</p>}
               />
@@ -125,7 +124,6 @@ export const SignUp = () => {
                 onChange={async (e) => {
                   setFirstName(e.target.value);
                   setValue(e.target.name, e.target.value);
-                  await triggerValidation({ name: e.target.name });
                 }}
                 ref={register({ required: true, maxLength: 80 })}
                 error={errors.firstName && <p>This is required</p>}
@@ -144,7 +142,6 @@ export const SignUp = () => {
                 onChange={async (e) => {
                   setLastName(e.target.value);
                   setValue(e.target.name, e.target.value);
-                  await triggerValidation({ name: e.target.name });
                 }}
                 ref={register({ required: true })}
                 error={errors.lastName && <p>This is required</p>}
@@ -163,7 +160,6 @@ export const SignUp = () => {
                 onChange={async (e) => {
                   setHashedPwd(e.target.value);
                   setValue(e.target.name, e.target.value);
-                  await triggerValidation({ name: e.target.name });
                 }}
                 ref={register({ required: true })}
                 error={errors.password && <p>This is required</p>}
