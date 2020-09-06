@@ -9,7 +9,7 @@ import { Login } from "./views/login";
 import { SignUp } from "./views/signup";
 import { Fetch } from "./views/fetch";
 import { AddAdvert } from "./views/advert/addAdvert";
-import { Main } from "./views/main";
+import { Main } from "./views/main/main";
 import { AdvertList } from './views/advert-list/advert-list';
 
 function App() {
@@ -18,11 +18,9 @@ function App() {
       <ApolloProvider client={client}>
         <Router>
           <Switch>
-            {/* <Route path="/">
+            <Route exact path="/">
               <Main />
-            <Route>
-            Patryk rzuć okiem co z tym jest nie tak plx - chyba, że u mnie coś na windowsie to odświeżanie nawala
-            */}
+            </Route>
             <Route path="/signup">
               <SignUp />
             </Route>
