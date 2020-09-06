@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { MainAppBar } from "../components/appbar";
+import { SelectSubject } from './select-subjects';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,6 +31,7 @@ export const Main = () => {
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={12} md={12} className={classes.image}>
+          <SelectSubject />
         </Grid>
       </Grid>
     </React.Fragment>
