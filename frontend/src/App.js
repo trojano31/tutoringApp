@@ -10,6 +10,7 @@ import { SignUp } from "./views/signup";
 import { Fetch } from "./views/fetch";
 import { AddAdvert } from "./views/advert/addAdvert";
 import { Main } from "./views/main";
+import { AdvertList } from './views/advert-list/advert-list';
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
             </Route>
             <Route path="/advert">
               <AddAdvert />
+            </Route>
+            <Route path="/adverts">
+              <AdvertList />
             </Route>
           </Switch>
         </Router>
