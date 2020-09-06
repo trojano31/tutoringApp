@@ -1,17 +1,16 @@
 import React from 'react';
-import { InputLabel, Select, MenuItem, TextField } from '@material-ui/core';
+import { InputLabel, MenuItem, TextField } from '@material-ui/core';
 
 export const Select = ({ options, ...rest }) => 
 <TextField
   id="standard-select-currency"
   select
-  label="Select"
   helperText="Please select your currency"
   {...rest}
 >
 {options.map(option => (
-  <MenuItem key={option.value} value={option.value}>
-    {option.label}
+  <MenuItem key={option.id} value={option.id}>
+    {option.name}
   </MenuItem>
 ))}
 </TextField>
