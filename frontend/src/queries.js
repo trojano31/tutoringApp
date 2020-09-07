@@ -1,9 +1,12 @@
 import gql from 'graphql-tag';
 
 export const GET_SUBJECTS = gql`
-query subjects($paginationInput: PaginationInput!) {
-  SubjectList {
-      result,
+  query($paginationInput: PaginationInput!) {
+    subjects(paginationInput: $paginationInput) {
+      result {
+        id,
+        name,
+      }
     }
   }
 `;
