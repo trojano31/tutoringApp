@@ -1,5 +1,5 @@
 const defaulState = {
-  subjectId: ''
+  subjectId: '',
 }
 
 export const advertReducer = (state = defaulState, { type, payload }) => {
