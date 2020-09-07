@@ -5,6 +5,7 @@ import { useFormContext } from 'react-hook-form';
 export const Select = ({ options, ...rest }) => {
   return (
     <TextField
+      fullWidth
       select
       {...rest}
     >
