@@ -14,18 +14,16 @@ export const SelectSubject = () => {
       },
     },
   });
-  console.log(loading, error, data);
   const methods = useForm();
-  if (error) return <>error</>
+  const options = data?.subjects?.result ?? [];
+  if (error || !options.length) return <>error</>
   return(
-    <FormProvider {...methods} >
-      <form onSubmit={methods.handleSubmit(data => console.log(data))}>
-        {loading
-          ? <CircularProgress />
-          : <Select  {...{ options: data.subjects, name: 'subject', lable: 'Wybierz przedmiot' }}/>
-        }
-        <Button>Szukaj</Button>
-      </form>
-    </FormProvider>
+    <>
+      {loading
+        ? <CircularProgress />
+        : <Select  {...{ options, name: 'subject', helperText: 'Wybierz przedmiot' }}/>
+      }
+      <Button>Szukaj</Button>
+    </>
   )
 }
