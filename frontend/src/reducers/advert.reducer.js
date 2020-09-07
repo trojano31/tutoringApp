@@ -2,7 +2,7 @@ const defaulState = {
   subjectId: ''
 }
 
-const reducer = (state = defaulState, { type, payload }) => {
+export const advertReducer = (state = defaulState, { type, payload }) => {
   switch (type) {
     case 'set-subject-id':
       return { ...state, subjectId: payload };
