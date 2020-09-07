@@ -19,7 +19,7 @@ export const SelectSubject = () => {
         ? <CircularProgress />
         : <Select  {...{ options, name: 'subject', helperText: 'Wybierz przedmiot', onChange, value }}/>
       }
-      <Button color="primary">Szukaj</Button>
+      <Button color="primary" href='/adverts' disabled={!value}>Szukaj</Button>
     </Container>
   )
 }
