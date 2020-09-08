@@ -13,27 +13,6 @@ export const adverts = [
     price: 50,
     time: 60,
   },
-  {
-    teacher: { name: 'Jan' },
-    subject: { name: 'Matematyka' },
-    place: 0,
-    price: 50,
-    time: 60,
-  },
-  {
-    teacher: { name: 'Jan' },
-    subject: { name: 'Matematyka' },
-    place: 0,
-    price: 50,
-    time: 60,
-  },
-  {
-    teacher: { name: 'Jan' },
-    subject: { name: 'Matematyka' },
-    place: 0,
-    price: 50,
-    time: 60,
-  },
 ];
 
 export const Place = {
