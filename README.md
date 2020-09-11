@@ -9,12 +9,12 @@
 ## Kwestie warte wspomnienia dot. stacku technologicznego.
 
 - Cały projekt jest stworzony przy użyciu aktualnych technologii wykorzystywanych na rynku pracy jak: React, Nest.js, GraphQL itd.
-- Wdrożony [Docker][docker] compose
+- Wdrożony [Docker][docker] compose<br />
   ![alt text]("../../assets/docker.png)
-- Testy End-2-End wykonane w [Cypress][cypress]
+- Testy End-2-End wykonane w [Cypress][cypress]<br />
   ![alt text]("../../assets/cypress1.png)
   ![alt text]("../../assets/cypress2.png)
-- Automatyzacja developmentu (np. testów) przy użyciu [Buddy][buddy]
+- Automatyzacja developmentu (np. testów) przy użyciu [Buddy][buddy]<br />
   ![alt text]("../../assets/buddyDocs.jpg)
 - Wykorzystanie kilku wzorców projektowych.
 
