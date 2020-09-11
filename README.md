@@ -10,7 +10,9 @@
 
 - Cały projekt jest stworzony przy użyciu aktualnych technologii wykorzystywanych na rynku pracy jak: React, Nest.js, GraphQL itd.
 - Wdrożony [Docker][docker] compose<br />
+  ![alt text]("../../assets/docker2.png)
   ![alt text]("../../assets/docker.png)
+
 - Testy End-2-End wykonane w [Cypress][cypress]<br />
   ![alt text]("../../assets/cypress1.png)
   ![alt text]("../../assets/cypress2.png)
