@@ -4,7 +4,19 @@
 
 ## Zarządzanie korepetycjami nigdy nie było prostsze.
 
-#### Aplikacja służąca do zarządzania korepetycjami. [opis w trakcie budowy]
+#### Aplikacja służąca do zarządzania korepetycjami.
+
+## Kwestie warte wspomnienia dot. stacku technologicznego.
+
+- Cały projekt jest stworzony przy użyciu aktualnych technologii wykorzystywanych na rynku pracy jak: React, Nest.js, GraphQL itd.
+- Wdrożony [Docker][docker] compose
+  ![alt text]("../../assets/docker.png)
+- Testy End-2-End wykonane w [Cypress][cypress]
+  ![alt text]("../../assets/cypress1.png)
+  ![alt text]("../../assets/cypress2.png)
+- Automatyzacja developmentu (np. testów) przy użyciu [Buddy][buddy]
+  ![alt text]("../../assets/buddyDocs.jpg)
+- Wykorzystanie kilku wzorców projektowych.
 
 ## Specyfikacja biznesowa (w trakcie rozwoju)
 
@@ -41,6 +53,9 @@
 [database]: docs/database.md
 [stack]: /docs/stack.md
 [usecase]: /docs/usecase.md
+[buddy]: buddy.works
+[cypress]: https://www.cypress.io/
+[docker]: https://www.docker.com/
 
 ## Get in Touch
 
